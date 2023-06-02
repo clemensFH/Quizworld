@@ -1,0 +1,41 @@
+h1{
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 50px;
+}
+
+.quiz-preview-header{
+    display: flex;
+    align-items: baseline;
+}
+
+.quiz-preview-container{
+    border: 3px solid black;
+    margin-bottom: 30px;
+}
+
+.quiz-preview-item{
+    margin: 0;
+}
+
+.quiz-preview-title{
+    padding: 5px 0 0 5px;
+}
+
+.quiz-preview-username{
+    padding-left: 30px;
+}
+
+.quiz-preview-categories{
+    padding-left: 100px;
+}
+
+.quiz-preview-date{
+    margin-left: auto;
+    padding-right: 10px
+}
