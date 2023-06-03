@@ -19,11 +19,16 @@ window.onload = function () {
                 title.className = "quiz-preview-title quiz-preview-item"
                 previewHeader.appendChild(title)
 
+                //Username Container
+                const usernameContainer = document.createElement("div")
+                usernameContainer.className = "quiz-preview-username-container"
+
                 // Username
                 const username = document.createElement("p")
                 username.className = "quiz-preview-username quiz-preview-item"
                 username.innerHTML = "by " + quiz.creator.name
-                previewHeader.appendChild(username)
+                usernameContainer.appendChild(username)
+                previewHeader.appendChild(usernameContainer)
 
                 // categories
                 const categories = document.createElement("p")
