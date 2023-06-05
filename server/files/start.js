@@ -24,7 +24,12 @@ window.onload = function () {
             // take quiz
             const btn = document.getElementById("btn-take-quiz")
             btn.addEventListener("click", function (){
-                location.href = "quiz.html?quizId="+quiz.id
+                location.href = "game.html"
+            })
+
+            const btnBack = document.getElementById("back-btn")
+            btnBack.addEventListener("click", function (){
+                location.href = "home.html"
             })
 
 
