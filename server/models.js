@@ -1,8 +1,12 @@
 class User {
     constructor(name, password) {
+        this.id = User.idpool
+        User.idpool++
         this.name = name
         this.password = password
     }
+
+    static idpool = 1
 }
 
 class Quiz {
@@ -47,3 +51,33 @@ quiz2 = new Quiz("Best", "Sports", Date.now(), "Best sports quiz",
 module.exports.users = [user1, user2]
 module.exports.quizes = [quiz1, quiz2]
 module.exports.questions = [q1, q2, q3]
+
+module.exports.addUser = function (username, password){
+    module.exports.users.push(new User(username, password))
+};
+
+module.exports.removeUser = function (userid) {
+    let idx = -1;
+    for(let i= 0; i<module.exports.users.length; i++){
+        if(module.exports.users[i].id == userid){
+            idx = i
+            break
+        }
+    }
+    console.log("Removing user with id: " + userid)
+
+    module.exports.quizes = module.exports.quizes.filter(quiz => quiz.creator.id != userid)
+
+    module.exports.users.splice(idx, 1)
+};
+
+module.exports.validateUser = function (username, password){
+    for(let i=0; i<module.exports.users.length; i++){
+        let user = module.exports.users[i]
+        console.log(user)
+        if(user.name === username && user.password === password){
+            return user.id
+        }
+    }
+    return undefined
+};

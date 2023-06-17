@@ -57,6 +57,6 @@ window.onload = function () {
             });
         }
     };
-    xhr.open("GET", "/quizes");
+    xhr.open("GET", "/quizes?userID=1");
     xhr.send();
 };

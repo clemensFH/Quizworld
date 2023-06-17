@@ -11,8 +11,33 @@
 <div class="container">
     <div id="home" class="flex-column flex-center">
         <h1>Login / Sign Up</h1>
-        <a href="/home.html" class="blue_btn">Login</a>
-        <a href="/home.html" class="green_btn">Sign Up</a>
+
+        <div style="height: 200px">
+            <a href="/home.html" class="blue_btn">Login</a>
+            <form id="loginForm" action="/login" method="post">
+                <div class="input-field">
+                    <input type="text" name="name" id="name" placeholder="Enter Username">
+                </div>
+                <div class="input-field">
+                    <input type="password" name="pw" id="pw" placeholder="Enter Password">
+                </div>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+
+        <div>
+            <a href="/home.html" class="green_btn">Sign Up</a>
+
+            <form id="registerForm" action="/user" method="post">
+                <div class="input-field">
+                    <input type="text" name="username" id="username" placeholder="Enter Username">
+                </div>
+                <div class="input-field">
+                    <input type="password" name="password" id="password" placeholder="Enter Password">
+                </div>
+                <input type="submit" value="Register">
+            </form>
+        </div>
     </div>
 </div>
 </body>

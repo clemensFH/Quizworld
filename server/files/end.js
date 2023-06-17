@@ -2,6 +2,8 @@ const username = document.querySelector('#username');
 const saveScoreBtn = document.querySelector('#saveScoreBtn');
 const finalScore = document.querySelector('#finalScore');
 const mostRecentScore = localStorage.getItem('mostRecentScore');
+//const backbtn = document.getElementById("Back")
+//backbtn.href = "startquiz.html/"
 
 const highScore = JSON.parse(localStorage.getItem('highScore')) || [];
 

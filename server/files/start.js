@@ -38,6 +38,6 @@ window.onload = function () {
         }
 
     }
-    xhr.open("GET", "/quiz/" + id)
+    xhr.open("GET", "/quizes/" + id)
     xhr.send()
 }
