@@ -1,4 +1,18 @@
 window.onload = function () {
+    const xhr2 = new XMLHttpRequest();
+    xhr2.onload = function () {
+        if(xhr2.status === 200) {
+            const profileBtn = document.getElementById("profile-btn")
+            const id = JSON.parse(xhr2.responseText)
+            profileBtn.innerHTML = "Profile"
+            profileBtn.addEventListener("click", function () {
+                location.href = "profile.html"
+            })
+        }
+    };
+    xhr2.open("GET", "/userID")
+    xhr2.send();
+
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -57,6 +71,6 @@ window.onload = function () {
             });
         }
     };
-    xhr.open("GET", "/quizes?userID=1");
+    xhr.open("GET", "/quizes");
     xhr.send();
 };

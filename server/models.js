@@ -36,7 +36,7 @@ class Question {
 opt = {"A": false, "B": false, "C": true, "D": false}
 
 user1 = new User("John Wick", "asd123")
-user2 = new User("Mia Mahlkova", "123asdX")
+user2 = new User("Mia Mahlkova", "123asd")
 
 q1 = new Question("1?", opt)
 q2 = new Question("2?", opt)
@@ -74,7 +74,6 @@ module.exports.removeUser = function (userid) {
 module.exports.validateUser = function (username, password){
     for(let i=0; i<module.exports.users.length; i++){
         let user = module.exports.users[i]
-        console.log(user)
         if(user.name === username && user.password === password){
             return user.id
         }
