@@ -1,42 +1,57 @@
-window.onload = function () {
-    const quizID = new URLSearchParams(window.location.search).get("quizID");
-    const xhr = new XMLHttpRequest()
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            const body = document.querySelector("body")
-            const quiz = JSON.parse(xhr.responseText)
+function putQuiz() {
+    console.log(document.forms)
+}
 
+
+const quizID = new URLSearchParams(window.location.search).get("quizID");
+const xhr = new XMLHttpRequest()
+xhr.onload = function () {
+    if (xhr.status === 200) {
+        const body = document.querySelector("body")
+        const quiz = JSON.parse(xhr.responseText)
+
+        document.getElementById("title").value = quiz.title
+        document.getElementById("category").value = quiz.category
+        document.getElementById("description").value = quiz.description
+
+
+        var i = 1
+        for (var question of quiz.questions) {
             const form = document.createElement("form")
-            for(var question of quiz.questions){
-                const container = document.createElement("div")
-                const questionText = document.createElement("textarea")
-                questionText.value = question.text
-                form.appendChild(questionText)
+            const container = document.createElement("div")
+            const heading = document.createElement("h5")
+            heading.innerHTML = "Frage " + i
+            container.appendChild(heading)
 
-                for(const option in question.options){
-                    const optionText = document.createElement("input")
-                    optionText.value = option
-                    form.appendChild(optionText)
+            const questionText = document.createElement("textarea")
+            questionText.value = question.text
+            questionText.id = `Q${i}_Text`
+            container.appendChild(questionText)
 
-                    const optionTrue = document.createElement("input")
-                    optionTrue.type = "radio"
-                    optionTrue.id = "Wahr"
-                    optionTrue.value = "Wahr"
-                    optionTrue.name = option + "_Result"
-                    form.appendChild(optionTrue)
+            var j = 1
+            for (const option in question.options) {
+                const optcon = document.createElement("div")
+                const optionText = document.createElement("input")
+                optionText.value = option
+                optionText.id = `Q${i}O${j}_Text`
+                optcon.appendChild(optionText)
 
-                    const optionFalse = document.createElement("input")
-                    optionFalse.type = "radio"
-                    optionFalse.id = "Falsch"
-                    optionFalse.value = "Falsch"
-                    optionFalse.name = option + "_Result"
-                    question.options[option] === false ? optionFalse.select() : optionTrue.select()
-                    form.appendChild(optionFalse)
+                const optionTrue = document.createElement("input")
+                optionTrue.type = "checkbox"
+                optionTrue.id = `Q${i}O${j}_Result`
+                if(question.options[option]){
+                    optionTrue.checked = question.options[option] === true
                 }
-                body.appendChild(form)
+                optcon.appendChild(optionTrue)
+
+                container.appendChild(optcon)
+                j++
             }
+            form.appendChild(container)
+            body.appendChild(form)
+            i++
         }
     }
-    xhr.open("GET", "quizes/"+quizID)
-    xhr.send()
-};
+}
+xhr.open("GET", "quizes/" + quizID)
+xhr.send()
