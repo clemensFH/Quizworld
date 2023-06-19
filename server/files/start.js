@@ -11,7 +11,7 @@ window.onload = function () {
 
             // Username
             const username = document.getElementById("quiz-username")
-            username.innerHTML = quiz.creator.name
+            username.innerHTML = quiz.creatorID
 
             // Date
             const date = document.getElementById("quiz-info-date")

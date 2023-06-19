@@ -10,6 +10,8 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
 
+// TODO Klea: geschwünschtes Quizes abfragen und setzten
+
 let questions = [
     {
         question: "What is 2+2?",

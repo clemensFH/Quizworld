@@ -39,7 +39,7 @@ window.onload = function () {
                 // Username
                 const username = document.createElement("p");
                 username.className = "quiz-preview-username quiz-preview-item";
-                username.innerHTML = "by " + quiz.creator.name;
+                username.innerHTML = "by " + quiz.creatorID;
                 usernameContainer.appendChild(username);
                 previewHeader.appendChild(usernameContainer);
 

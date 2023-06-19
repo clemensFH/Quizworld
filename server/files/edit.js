@@ -1,5 +1,70 @@
+function getQuiz(){
+    const quiz = {}
+    quiz.questions = []
+
+    const quizElements = Array.from(document.forms[0].elements).filter(
+        (element) => element.id
+    )
+
+    // Quiz Info
+    for (const element of quizElements) {
+        let name = element.id
+        let value
+        console.log(name)
+        if(name === "id" || name === "creatorID"){
+            value = Number(element.value)
+        }else{
+            value = element.value
+        }
+        quiz[name] = value
+    }
+    console.log(JSON.stringify(quiz))
+
+
+    // Questions -- eine Question form wird iteriert
+
+    for(let i= 1; i<document.forms.length; i++){
+        let question = {}
+        let options = {}
+        console.log(i)
+        // Question form
+        const OptionElements = Array.from(document.forms[i].elements).filter(
+            (element) => element.id
+        )
+
+        let oldIdx
+        for (const element of OptionElements) {
+            let name = element.id
+            let value
+            console.log(name + " " + element.value)
+
+
+            if(name === `Q${i}_Text`){
+                question.text = element.value
+            }
+            else if(name.includes("Text")){
+                options[element.value] = false
+                oldIdx = element.value
+            } else if(name.includes("Result")){
+                if(element.checked){
+                    options[oldIdx] = true
+                }
+            }
+        }
+        question.options = options
+        quiz.questions.push(question)
+    }
+    console.log(quiz)
+    return quiz
+}
+
 function putQuiz() {
-    console.log(document.forms)
+    const quiz = getQuiz()
+    const xhr = new XMLHttpRequest()
+    xhr.open("PUT", "/quiz")
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(quiz))
+    location.href = "/"
 }
 
 
@@ -10,6 +75,11 @@ xhr.onload = function () {
         const body = document.querySelector("body")
         const quiz = JSON.parse(xhr.responseText)
 
+        // TODO Optional Klea: Frage hinzufügen/löschen
+
+        document.getElementById("id").value = quiz.id
+        document.getElementById("creatorID").value = quiz.creatorID
+        document.getElementById("date").value = quiz.date
         document.getElementById("title").value = quiz.title
         document.getElementById("category").value = quiz.category
         document.getElementById("description").value = quiz.description
@@ -26,6 +96,7 @@ xhr.onload = function () {
             const questionText = document.createElement("textarea")
             questionText.value = question.text
             questionText.id = `Q${i}_Text`
+            questionText.required = true
             container.appendChild(questionText)
 
             var j = 1
@@ -34,11 +105,14 @@ xhr.onload = function () {
                 const optionText = document.createElement("input")
                 optionText.value = option
                 optionText.id = `Q${i}O${j}_Text`
+                optionText.required = true
                 optcon.appendChild(optionText)
 
                 const optionTrue = document.createElement("input")
-                optionTrue.type = "checkbox"
+                optionTrue.type = "radio"
+                optionTrue.name = `Q${i}_Result`
                 optionTrue.id = `Q${i}O${j}_Result`
+                optionTrue.required = true
                 if(question.options[option]){
                     optionTrue.checked = question.options[option] === true
                 }

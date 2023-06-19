@@ -8,6 +8,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    /*TODO Klea: font-size überall auf 100% weil sont sind die form input-felder zu klein*/
     font-size: 62.5%;
     font-family: 'Nova Square', cursive;
 }

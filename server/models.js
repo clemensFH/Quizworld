@@ -9,13 +9,13 @@ class User {
     static idpool = 1
 }
 
-class Quiz {
-    constructor(title, category, date, description, creator, questions) {
+ class Quiz {
+    constructor(title, category, date, description, creatorID, questions) {
         this.title = title
         this.category = category
         this.date = date
         this.description = description
-        this.creator = creator          // OneToMany
+        this.creatorID = creatorID          // OneToMany
         this.questions = questions      // OneToMany
         this.id = Quiz.idpool
         Quiz.idpool++
@@ -33,19 +33,22 @@ class Question {
 }
 
 
-opt = {"A": false, "B": false, "C": true, "D": false}
+opt1= {"A": false, "B": false, "C": true, "D": false}
+opt2 = {"A": true, "B": false, "C": false, "D": false}
+opt3 = {"A": false, "B": true, "C": false, "D": false}
+
 
 user1 = new User("John Wick", "asd123")
 user2 = new User("Mia Mahlkova", "123asd")
 
-q1 = new Question("1?", opt)
-q2 = new Question("2?", opt)
-q3 = new Question("3?", opt)
+q1 = new Question("1?", opt1)
+q2 = new Question("2?", opt2)
+q3 = new Question("3?", opt3)
 
-quiz1 = new Quiz("Test", "Physics", Date.now(), "Best physics quiz",
-                    user1, [q1,q2])
-quiz2 = new Quiz("Best", "Sports", Date.now(), "Best sports quiz",
-    user2, [q3,q2])
+quiz1 = new Quiz("Test", "Physics", new Date("2023-03-06"), "Best physics quiz",
+                    user1.id, [q1,q2])
+quiz2 = new Quiz("Best", "Sports", new Date("2023-02-05"), "Best sports quiz",
+    user2.id, [q3,q2])
 
 
 module.exports.users = [user1, user2]
@@ -80,3 +83,18 @@ module.exports.validateUser = function (username, password){
     }
     return undefined
 };
+
+module.exports.addQuiz = function (fakeQuiz){
+    const x = new Quiz(fakeQuiz.title, fakeQuiz.category, fakeQuiz.date, fakeQuiz.description, fakeQuiz.creatorID, fakeQuiz.questions)
+    x.id = fakeQuiz.id
+    module.exports.quizes.push(x)
+}
+
+module.exports.removeQuiz = function (quizID){
+    module.exports.quizes = module.exports.quizes.filter(q => q.id !== quizID)
+}
+
+module.exports.updateQuiz = function (fakeQuiz){
+    module.exports.removeQuiz(fakeQuiz.id)
+    module.exports.addQuiz(fakeQuiz)
+}

@@ -22,6 +22,17 @@ app.use(express.urlencoded({ extended: true }));
 // cookie parser middleware
 app.use(cookieParser());
 
+const requireLogin = (req, res, next) => {
+    if (req.session.userID) {
+        next();
+    } else {
+        // User is not logged in, redirect to the login page or send an error response
+        res.redirect('/'); // Redirect to the login page
+        // Or
+        // res.status(401).send('Unauthorized'); // Send an unauthorized error response
+    }
+};
+
 //------------------- HTTP ENDPOINTS --------------------------------------------------------------------------------//
 
 
@@ -68,7 +79,7 @@ app.get("/user/:userID", function (req, res){
 app.get("/quizes/:quizID",function (req, res) {
     const id = req.params.quizID
     const quiz = QuizWorldModel.quizes.find(quiz => quiz.id == id);
-
+    console.log(quiz)
     if(quiz){
         res.send(quiz)
     }else {
@@ -85,7 +96,7 @@ app.get("/quizes", function (req, res){
     var quizes = QuizWorldModel.quizes
 
     if(userid){
-        quizes = quizes.filter(quiz => quiz.creator.id == userid);
+        quizes = quizes.filter(quiz => quiz.creatorID == userid);
     }
     res.send(quizes)
 });
@@ -94,7 +105,7 @@ app.get("/quizes", function (req, res){
 /*
     GET current User
  */
-app.get("/profile", function(req, res){
+app.get("/profile", requireLogin, function(req, res){
     if(req.session.userID){
         const user = QuizWorldModel.users.find(user => user.id == req.session.userID);
         res.send(user)
@@ -108,7 +119,10 @@ app.get("/profile", function(req, res){
     PUT Qiuz bearbeiten
  */
 app.put("/quiz", function (req, res){
-
+    const quiz = req.body
+    console.log("PUT " + quiz)
+    QuizWorldModel.updateQuiz(quiz)
+    //res.redirect( "/profile")
 });
 
 
