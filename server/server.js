@@ -76,20 +76,20 @@ app.get("/user/:userID", function (req, res){
 /*
     GET Quiz by ID
  */
-app.get("/quizes/:quizID",function (req, res) {
+app.get("/quizes/:quizID", function (req, res) {
     const id = req.params.quizID
     const quiz = QuizWorldModel.quizes.find(quiz => quiz.id == id);
-    console.log(quiz)
-    if(quiz){
+    console.log(quiz);
+    if (quiz) {
         res.send(quiz)
-    }else {
+    } else {
         res.sendStatus(404)
     }
 });
 
 
 /*
-    GET Quizes opt: queryparam. userID
+    GET Quizzes opt: queryparam. userID
  */
 app.get("/quizes", function (req, res){
     const userid = req.query.userID
@@ -116,7 +116,7 @@ app.get("/profile", requireLogin, function(req, res){
 
 
 /*
-    PUT Qiuz bearbeiten
+    PUT Quiz bearbeiten
  */
 app.put("/quiz", function (req, res){
     const quiz = req.body
@@ -127,7 +127,7 @@ app.put("/quiz", function (req, res){
 
 
 /*
-    PUT Qiuz erstellen
+    PUT Quiz erstellen
  */
 app.post("/quiz", function (req, res){
 
@@ -144,12 +144,12 @@ app.post("/login", function (req, res){
     if(id){
         req.session.userID = id
         res.redirect("/")
-
     }else{
-        res.send("Ungültige Anmeldedaten. Username oder Passwort falsch!")
-        //window.alert("Ungültige Anmeldedaten. Username oder Passwort falsch!")
+        res.status(401).json({ error: "Ungültige Anmeldedaten. Username oder Passwort falsch!" });
+
     }
 })
+
 
 
 /*

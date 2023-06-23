@@ -1,8 +1,11 @@
+/* home.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
 
 :root {
     --primary-color: rgb(18, 93, 255);
     --secondary-color: rgb(0, 102, 255);
+    --color3: rgb(100, 102, 255);
     --text-color: #fff;
     --background-color: rgb(29, 26, 26);
 }
@@ -19,17 +22,16 @@ body {
     background-color: var(--background-color);
 }
 
+p {
+    font-size: 1.9rem;
+}
+
 h1 {
-    font-size:6rem;
+    font-size: 6rem;
     color: var(--text-color);
     margin-bottom: 5rem;
     margin-top: 5rem;
     text-align: center;
-}
-
-h2 {
-    font-size: 4.5rem;
-    margin-bottom: 4rem;
 }
 
 .container {
@@ -55,6 +57,10 @@ h2 {
     text-align: center;
 }
 
+.quiz-preview-description {
+    text-align: justify;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -65,7 +71,7 @@ nav {
 
 nav input[type="text"] {
     width: 100%;
-    max-width: 50rem;
+    max-width: 80%;
     padding: 1.2rem;
     font-size: 2.4rem;
     border: none;
@@ -115,64 +121,112 @@ nav button:last-child {
     transform: scale(1.03);
 }
 
+.quiz-previews-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
 .quiz-preview-container {
     border: 3px solid black;
-    margin-bottom: 20px;
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-    height: 15vh;
-    background: var(--primary-color);
     border-radius: 5px;
     transition: transform 0.3s;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+}
+
+.quiz-preview-container:nth-child(even) {
+    background: var(--color3);
+}
+
+.quiz-preview-container:nth-child(odd) {
+    background: var(--primary-color);
 }
 
 .quiz-preview-container:hover {
     transform: scale(1.02);
 }
 
-.quiz-preview-header {
-    display: flex;
-    align-items: baseline;
-    padding: 1rem;
-}
-
 .quiz-preview-title {
-    padding: 5px 0 0 5px;
     color: var(--text-color);
-    font-size: 2.5rem;
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.quiz-preview-username-container {
-    width: 25%;
-    white-space: nowrap;
+.quiz-preview-creator-date {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.quiz-preview-creator {
+    color: var(--text-color);
+    margin-right: 1rem;
+}
+
+.quiz-preview-category {
+    color: var(--text-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.quiz-preview-description {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    flex-grow: 1;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.quiz-preview-username {
-    padding-left: 10px;
-    color: var(--text-color);
-    font-size: 1.8rem;
+
+.filter-dropdown-content {
+    display: none;
+    position: absolute;
+    align-items: flex-start;
+    width: max-content;
+    max-width: 40rem;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1;
+    margin-top: 485px;
+    right: 2.3rem; /* Position on the right side */
+    background-color: rgba(0, 102, 255, 0.9);
 }
 
-.quiz-preview-categories {
-    flex-grow: 1;
-    padding-left: 40rem;
-    margin-right: 5rem;
-    color: var(--text-color);
-    font-size: 2.2rem;
+.filter-container h4 {
+    font-size: 2.5rem;
+    color: white;
 }
 
-.quiz-preview-date {
-    padding-right: 1rem;
-    color: var(--text-color);
-    font-size: 2.2rem;
+.show {
+    display: block;
 }
 
-.quiz-preview-desc {
-    padding: 1rem;
-    color: var(--text-color);
-    font-size: 1.6rem;
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 1rem;
+}
+
+.category-button {
+    border: 1px solid #ccc;
+    background-color: inherit;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.category-button.selected {
+    color: rgb(41, 232, 111);
+    border-color: rgb(41, 232, 111);
+    background-color: rgba(41, 232, 111, 0.2);
 }

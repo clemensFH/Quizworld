@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login/SignUp</title>
     <link rel="stylesheet" href="style.css">
     <script type="module" src="index.js"></script>
@@ -12,34 +12,40 @@
     <div id="home" class="flex-column flex-center">
         <h1>Login / Sign Up</h1>
 
-<!--        TODO Klea: Verschöneren-->
-        <div style="height: 200px">
-            <a href="/home.html" class="blue_btn">Login</a>
-            <form id="loginForm" action="/login" method="post">
-                <div class="input-field">
-                    <input type="text" name="name" id="name" placeholder="Enter Username">
-                </div>
-                <div class="input-field">
-                    <input type="password" name="pw" id="pw" placeholder="Enter Password">
-                </div>
-                <input type="submit" value="Login">
-            </form>
+        <div class="form-container flex-column flex-center">
+            <button id="loginBtn" class="button blue_btn">Login</button>
+            <div id="loginForm" class="form hidden">
+                <form action="/login" method="post">
+                    <div class="input-field">
+                        <input type="text" name="name" id="name" placeholder="Enter Username">
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="pw" id="pw" placeholder="Enter Password">
+                    </div>
+                    <input type="submit" value="Enter" class="enterBtn blue_btn">
+                    <p class="error-message hidden">Username or Password is Incorrect!</p>
+                </form>
+            </div>
+        </div>
         </div>
 
-        <div>
-            <a href="/home.html" class="green_btn">Sign Up</a>
-
-            <form id="registerForm" action="/user" method="post">
-                <div class="input-field">
-                    <input type="text" name="username" id="username" placeholder="Enter Username">
-                </div>
-                <div class="input-field">
-                    <input type="password" name="password" id="password" placeholder="Enter Password">
-                </div>
-                <input type="submit" value="Register">
-            </form>
+        <div class="form-container flex-column flex-center">
+            <button id="signupBtn" class="button green_btn">Sign Up</button>
+            <div id="signupForm" class="form hidden">
+                <form action="/user" method="post">
+                    <div class="input-field">
+                        <input type="text" name="username" id="username" placeholder="Enter Username">
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="password" id="password" placeholder="Enter Password">
+                    </div>
+                    <input type="submit" value="Enter" class="enterBtn green_btn">
+                </form>
+            </div>
         </div>
     </div>
 </div>
+<script src="index.js"></script>
+<script src="path/to/models.js"></script>
 </body>
 </html>

@@ -1,0 +1,181 @@
+/* profile.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
+
+:root {
+    background-color: rgb(29, 26, 26);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    color: white;
+    font-family: 'Nova Square', cursive;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Start Quiz */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Profile Info */
+.profile-info {
+    margin-bottom: 20px;
+    font-size: 5rem;
+    margin-left: 5rem;
+}
+#logout-button{
+    margin-top: -10rem;
+}
+
+.info-row {
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.edit-icon {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.username-edit,
+.password-edit {
+    display: none;
+}
+
+.username-input,
+.password-input {
+    margin-right: 5px;
+    padding: 2px;
+}
+
+/* Quiz Section */
+.quiz-section {
+    margin-bottom: 20px;
+}
+
+.quiz-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.quiz-button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.quiz-button.active {
+    background-color: #0056b3;
+}
+
+.quiz-content {
+    display: none;
+}
+
+.quiz-button + .quiz-content {
+    margin-top: 10px;
+}
+
+.quiz-button:hover {
+    background-color: #0056b3;
+}
+
+/* Logout and Delete Account Buttons */
+.logout-button,
+.delete-account-button {
+    display: block;
+    margin-top: 10px;
+    margin-right: auto;
+    padding: 5px 10px;
+    border: none;
+    background-color: #dc3545;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+    margin-left: 50rem;
+}
+
+.logout-button{
+    position: absolute;
+    top: 38rem;
+}
+
+.delete-account-button{
+    position: absolute;
+    top: 46rem;
+}
+
+.logout-button:hover,
+.delete-account-button:hover {
+    background-color: #c82333;
+}
+
+/* Home Button */
+.home-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+}
+
+.home-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .info-label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .edit-icon {
+        margin-left: 5px;
+    }
+
+    .quiz-buttons {
+        flex-direction: column;
+    }
+
+    .quiz-button {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .logout-button,
+    .delete-account-button,
+    .home-button {
+        width: 100%;
+        max-width: none;
+    }
+}

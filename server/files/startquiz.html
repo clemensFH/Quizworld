@@ -1,30 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="startquiz.css"/>
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="startquiz.css">
+    <title>Quiz Preview</title>
 </head>
+<script src="startquiz.js" type="module"></script>
+<script src="game.js" type="module"></script>
 <body>
-<button id="back-btn">&larr;</button>
+<div class="container">
+    <button id="btn-back" onclick="goBack()">&#8592;</button>
+    <h1 id="quiz-title">Quiz Title</h1>
+    <h3 id="quiz-creator">by Creator</h3>
+    <div class="quiz-info-container">
+        <h4>Category:</h4>
+        <p id="quiz-category">Category 1, Category 2, Category 3</p>
+    </div>
+    <div class="quiz-info-container">
+        <h4>Created / Last Edited:</h4>
+        <p id="quiz-date">June 21, 2023</p>
+    </div>
+    <div class="quiz-info-container">
+        <h4>Number of Questions:</h4>
+        <p id="quiz-question-count">5</p>
+    </div>
+    <div class="quiz-info-container">
+        <h4>Description:</h4>
+        <p id="quiz-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, nulla
+            ac iaculis molestie, quam nisl dignissim elit, eu maximus ex sem in nulla.</p>
+    </div>
+    <button id="btn-take-quiz">Take Quiz</button>
+</div>
 
-<h1 id="quiz-title"></h1>
-<h3 id="quiz-username"></h3>
-<div class="quiz-info-container">
-    <h4>Created on / Last edited:</h4>
-    <p id="quiz-info-date"></p>
-</div>
-<div class="quiz-info-container">
-    <h4>Number of Questions:</h4>
-    <p id="quiz-info-number">NNN</p>
-</div>
-<div class="quiz-info-container">
-    <h4>Quiz Description:</h4>
-    <p id="quiz-info-desc"></p>
-</div>
-<button id="btn-take-quiz">Take Quiz</button>
+<script>
+    function goBack() {
+        window.history.back();
+    }
 
-<script type="module" src="start.js"></script>
+    document.getElementById("btn-take-quiz").addEventListener("click", function () {
+        location.href = "game.html";
+    });
+</script>
 </body>
+
 </html>
