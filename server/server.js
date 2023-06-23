@@ -145,8 +145,7 @@ app.post("/login", function (req, res){
         req.session.userID = id
         res.redirect("/")
     }else{
-        res.status(401).json({ error: "Ungültige Anmeldedaten. Username oder Passwort falsch!" });
-
+        res.send("Ungültige Anmeldedaten. Username oder Passwort falsch!")
     }
 })
 

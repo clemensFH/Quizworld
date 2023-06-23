@@ -38,6 +38,7 @@ loginForm.addEventListener("submit", (event) => {
 
     const userId = validateUser(username, password);    //models.js
 
+    // TODO Clemens: dein server.js tut es automatisch redirecten zu der Seite "Ungültige Anmeldedaten. Username oder Passwort falsch!" und der ist bei deinen Server.js.
     if (userId !== undefined) {
         // User login successful
         errorMessage.style.display = "none";
