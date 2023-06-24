@@ -54,6 +54,12 @@ app.get("/", function(req, res){
         res.sendFile(__dirname + "/files/index.html")
 })
 
+app.get('/logout',(req,res) => {
+    req.session.destroy();
+    console.log("logout")
+    res.redirect('/');
+});
+
 
 // Serve static content in directory 'files'
 app.use(express.static(path.join(__dirname, 'files')));
@@ -116,7 +122,7 @@ app.get("/profile", requireLogin, function(req, res){
 
 
 /*
-    PUT Qiuz bearbeiten
+    PUT Quiz bearbeiten
  */
 app.put("/quiz", function (req, res){
     const quiz = req.body
@@ -127,10 +133,12 @@ app.put("/quiz", function (req, res){
 
 
 /*
-    PUT Qiuz erstellen
+    POST Quiz erstellen
  */
 app.post("/quiz", function (req, res){
-
+    const quiz = req.body
+    console.log("POST " + quiz)
+    QuizWorldModel.addQuiz(quiz)
 })
 
 
@@ -138,6 +146,7 @@ app.post("/quiz", function (req, res){
     POST User Login
  */
 app.post("/login", function (req, res){
+    console.log(req.body)
     console.log("Login Try - user: " + req.body.name + " pw: " + req.body.pw)
     const id = QuizWorldModel.validateUser(req.body.name, req.body.pw)
     console.log("Login Successfull userID: " + id)
@@ -147,7 +156,6 @@ app.post("/login", function (req, res){
 
     }else{
         res.send("Ungültige Anmeldedaten. Username oder Passwort falsch!")
-        //window.alert("Ungültige Anmeldedaten. Username oder Passwort falsch!")
     }
 })
 

@@ -45,9 +45,9 @@ q1 = new Question("1?", opt1)
 q2 = new Question("2?", opt2)
 q3 = new Question("3?", opt3)
 
-quiz1 = new Quiz("Test", "Physics", new Date("2023-03-06"), "Best physics quiz",
+quiz1 = new Quiz("Test", "Physics", new Date("2023-03-06").toLocaleDateString("de-DE"), "Best physics quiz",
                     user1.id, [q1,q2])
-quiz2 = new Quiz("Best", "Sports", new Date("2023-02-05"), "Best sports quiz",
+quiz2 = new Quiz("Best", "Sports", new Date("2023-02-05").toLocaleDateString("de-DE"), "Best sports quiz",
     user2.id, [q3,q2])
 
 
@@ -86,7 +86,7 @@ module.exports.validateUser = function (username, password){
 
 module.exports.addQuiz = function (fakeQuiz){
     const x = new Quiz(fakeQuiz.title, fakeQuiz.category, fakeQuiz.date, fakeQuiz.description, fakeQuiz.creatorID, fakeQuiz.questions)
-    x.id = fakeQuiz.id
+    console.log(x)
     module.exports.quizes.push(x)
 }
 
