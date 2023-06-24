@@ -26,7 +26,7 @@ body {
     padding: 2rem;
 }
 
-#btn-back {
+#back-btn {
     font-size: 3rem;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -39,7 +39,7 @@ body {
     justify-content: center;
 }
 
-#btn-back:hover {
+#back-btn:hover {
     transform: scale(1.1);
 }
 

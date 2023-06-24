@@ -1,53 +1,51 @@
 window.onload = function () {
-    const activeQuizId = getActiveQuizIdFromLocalStorage();
-    const quiz = getQuizById(activeQuizId);
+    const id = new URLSearchParams(window.location.search).get("quizId");
+    const xhr = new XMLHttpRequest()
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const quiz = JSON.parse(xhr.responseText)
 
-    if (quiz) {
-        updateQuizInfo(quiz);
-    } else {
-        console.log("Quiz not found");
+            // Title
+            const title = document.getElementById("quiz-title")
+            title.innerHTML = quiz.title
+
+            // Username
+            const username = document.getElementById("quiz-username")
+            username.innerHTML = "by " + quiz.creatorID
+
+            // Date
+            const date = document.getElementById("quiz-info-date")
+            date.innerHTML = new Date(quiz.date).toLocaleDateString("de-DE")
+
+            // Cat
+            const cat = document.getElementById("quiz-category")
+            cat.innerHTML = quiz.category
+
+            // Desc
+            const desc = document.getElementById("quiz-info-desc")
+            desc.innerHTML = quiz.description
+
+            // take quiz
+            const btn = document.getElementById("btn-take-quiz")
+            btn.addEventListener("click", function (){
+                location.href = "game.html"
+            })
+
+            const btnBack = document.getElementById("back-btn")
+            btnBack.addEventListener("click", function (){
+                location.href = "home.html"
+            })
+
+
+        } else {
+            console.log("Fehler")
+        }
+
     }
-};
-
-function getActiveQuizIdFromLocalStorage() {
-    return localStorage.getItem("activeQuizId");
+    xhr.open("GET", "/quizes/" + id)
+    xhr.send()
 }
 
-function getQuizById(quizId) {
-    const quizzes = getQuizzesFromLocalStorage();
-    return quizzes.find((quiz) => quiz.id === quizId);
-}
 
-function updateQuizInfo(quiz) {
-    const titleElement = document.getElementById("quiz-title");
-    const creatorElement = document.getElementById("quiz-creator");
-    const categoryElement = document.getElementById("quiz-category");
-    const dateElement = document.getElementById("quiz-date");
-    const numQuestionsElement = document.getElementById("quiz-question-count");
-    const descriptionElement = document.getElementById("quiz-description");
 
-    // Update the quiz information in the HTML elements
-    titleElement.innerText = quiz.name;
-    creatorElement.innerText = `by ${quiz.creator}`;
-    categoryElement.innerText = `Category: ${quiz.category.join(", ")}`;
-    dateElement.innerText = `Created / Last Edited: ${new Date(quiz.date).toLocaleDateString("de-DE")}`;
-    numQuestionsElement.innerText = `Number of Questions: ${quiz.numQuestions}`;
-    descriptionElement.innerText = quiz.description;
 
-    // Take Quiz Button
-    const btnTakeQuiz = document.getElementById("btn-take-quiz");
-    btnTakeQuiz.addEventListener("click", function () {
-        location.href = "game.html";
-    });
-
-    // Back Button
-    const btnBack = document.getElementById("btn-back");
-    btnBack.addEventListener("click", function () {
-        location.href = "home.html";
-    });
-}
-
-function getQuizzesFromLocalStorage() {
-    const quizzesJson = localStorage.getItem("quizzes");
-    return quizzesJson ? JSON.parse(quizzesJson) : [];
-}

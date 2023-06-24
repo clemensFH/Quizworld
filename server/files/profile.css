@@ -3,41 +3,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
 
 :root {
-    background-color: rgb(29, 26, 26);
+    --primary-color: rgb(18, 93, 255);
+    --secondary-color: rgb(0, 102, 255);
+    --color3: rgb(100, 102, 255);
+    --color4: rgb(100, 122, 255);
+    --text-color: #fff;
+    --background-color: rgb(29, 26, 26);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
     font-size: 62.5%;
-    color: white;
     font-family: 'Nova Square', cursive;
 }
 
 body {
+    background-color: var(--background-color);
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     min-height: 100vh;
 }
 
-/* Start Quiz */
 .container {
     width: 100%;
-    max-width: 1200px;
+    min-width: 100%;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Profile Info */
 .profile-info {
     margin-bottom: 20px;
     font-size: 5rem;
-    margin-left: 5rem;
-}
-#logout-button{
-    margin-top: -10rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 2px solid var(--primary-color); /* Added border */
+    padding: 10px; /* Added padding */
+    border-radius: 5px;
 }
 
 .info-row {
@@ -72,23 +77,24 @@ body {
     margin-bottom: 20px;
 }
 
-.quiz-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-
 .quiz-button {
-    margin-right: 10px;
-    padding: 5px 10px;
+    font-size: 2.4rem;
+    padding: 1.5rem 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: var(--text-color);
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 5px;
+    transition: transform 0.3s;
     border: none;
-    background-color: #007bff;
-    color: #fff;
+    outline: none;
     cursor: pointer;
 }
 
 .quiz-button.active {
-    background-color: #0056b3;
+    border: red;
 }
 
 .quiz-content {
@@ -100,82 +106,67 @@ body {
 }
 
 .quiz-button:hover {
-    background-color: #0056b3;
+    cursor: pointer;
+    box-shadow: 0 0.4rem 0 rgba(100, 122, 255, 0.6);
+    transform: scale(1.01);
 }
 
 /* Logout and Delete Account Buttons */
+.logout-delete-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 2rem;
+}
+
 .logout-button,
 .delete-account-button {
-    display: block;
-    margin-top: 10px;
-    margin-right: auto;
-    padding: 5px 10px;
+    flex-grow: 1;
+    font-size: 2.4rem;
+    padding: 1.5rem 0;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    border-radius: 5px;
+    transition: transform 0.3s;
     border: none;
-    background-color: #dc3545;
-    color: #fff;
+    outline: none;
     cursor: pointer;
-    width: 100%;
-    max-width: 200px;
-    margin-left: 50rem;
+    max-width: 50%;
+    margin: 0.5rem;
+}
+.delete-account-button {
+    background: linear-gradient(32deg, rgba(230, 29, 29, 1) 0%, rgb(224, 11, 11, 1) 100%);
 }
 
-.logout-button{
-    position: absolute;
-    top: 38rem;
-}
-
-.delete-account-button{
-    position: absolute;
-    top: 46rem;
-}
-
-.logout-button:hover,
 .delete-account-button:hover {
-    background-color: #c82333;
+    box-shadow: 0 0.4rem 0 rgba(225, 70, 70, 0.6);
+    transform: scale(1.03);
 }
 
-/* Home Button */
-.home-button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px 10px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    width: 100%;
-    max-width: 200px;
+.logout-button {
+    background: linear-gradient(32deg, rgba(11, 223, 36) 0%, rgb(41, 232, 111) 100%);
 }
 
-.home-button:hover {
-    background-color: #0056b3;
+.logout-button:hover {
+    box-shadow: 0 0.4rem 0 rgba(41, 232, 111, 0.6);
+    transform: scale(1.03);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .info-label {
-        display: block;
-        margin-bottom: 5px;
-    }
 
-    .edit-icon {
-        margin-left: 5px;
-    }
 
-    .quiz-buttons {
-        flex-direction: column;
-    }
-
-    .quiz-button {
-        margin-right: 0;
-        margin-bottom: 10px;
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .profile-info {
+        font-size: 3.5rem;
     }
 
     .logout-button,
-    .delete-account-button,
-    .home-button {
-        width: 100%;
-        max-width: none;
+    .delete-account-button {
+        position: static;
+        width: auto;
+        margin-top: 10px;
+        margin-right: 0;
+        right: 0;
     }
 }

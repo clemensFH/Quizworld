@@ -1,3 +1,39 @@
+var user;
+
+const xhr = new XMLHttpRequest();
+xhr.onload = function () {
+    if (xhr.status === 200) {
+        user = JSON.parse(xhr.responseText);
+        console.log(user);
+        const heading = document.getElementById("username");
+        heading.innerHTML = user.name;
+        setQuizzes(user);
+    }
+};
+xhr.open("GET", "/profile");
+xhr.send();
+
+function setQuizzes(user) {
+    const xhr2 = new XMLHttpRequest();
+    xhr2.onload = function () {
+        if (xhr2.status === 200) {
+            const quizzes = JSON.parse(xhr2.responseText);
+            const quizList = document.getElementById("quizes");
+            for (let quiz of quizzes) {
+                console.log(quiz);
+                const element = document.createElement("li");
+                const link = document.createElement("a");
+                link.href = `/edit.html?quizID=${quiz.id}`;
+                link.innerHTML = `Quiz: ${quiz.title}`;
+                element.appendChild(link);
+                quizList.appendChild(element);
+            }
+        }
+    };
+    xhr2.open("GET", `/quizes?userID=${user.id}`);
+    xhr2.send();
+}
+
 function goBack() {
     window.history.back();
 }
@@ -21,15 +57,6 @@ function toggleUsernameEdit() {
     }
 }
 
-function saveUsername() {
-    const usernameSection = document.getElementById('username');
-    const usernameEditSection = document.getElementById('username-edit');
-    const usernameInput = document.getElementById('username-input');
-
-    usernameSection.textContent = usernameInput.value;
-    toggleUsernameEdit();
-}
-
 function togglePasswordEdit() {
     const passwordSection = document.getElementById('password');
     const passwordEditSection = document.getElementById('password-edit');
@@ -45,14 +72,6 @@ function togglePasswordEdit() {
     }
 }
 
-function savePassword() {
-    const passwordSection = document.getElementById('password');
-    const passwordEditSection = document.getElementById('password-edit');
-    const passwordInput = document.getElementById('password-input');
-
-    passwordSection.textContent = passwordInput.value;
-    togglePasswordEdit();
-}
 
 function logout() {
     // Perform logout functionality
@@ -94,80 +113,6 @@ function toggleMyQuiz() {
     document.getElementById('quiz-taken-button').classList.remove('active');
 }
 
-// Dummy data for quiz content
-const quizzesTaken = [
-    { title: 'Quiz 1', creator: 'Creator A', percentage: 80 },
-    { title: 'Quiz 2', creator: 'Creator B', percentage: 60 },
-    { title: 'Quiz 3', creator: 'Creator C', percentage: 100 },
-];
-
-const quizzesCreated = [
-    { title: 'Quiz 4', creator: 'User123' },
-    { title: 'Quiz 5', creator: 'User123' },
-    { title: 'Quiz 6', creator: 'User123' },
-];
-
-function renderQuizzesTaken() {
-    const quizContent = document.getElementById('quiz-content');
-    quizContent.innerHTML = '';
-
-    quizzesTaken.forEach((quiz) => {
-        const quizButton = document.createElement('button');
-        quizButton.classList.add('quiz-button');
-
-        // Set quiz button text and color based on percentage
-        quizButton.textContent = `${quiz.title} by ${quiz.creator} (${quiz.percentage}%)`;
-        if (quiz.percentage < 33) {
-            quizButton.style.backgroundColor = 'red';
-        } else if (quiz.percentage < 66) {
-            quizButton.style.backgroundColor = 'yellow';
-        } else {
-            quizButton.style.backgroundColor = 'green';
-        }
-
-        quizContent.appendChild(quizButton);
-    });
-}
-
-function renderQuizzesCreated() {
-    const quizContent = document.getElementById('quiz-content');
-    quizContent.innerHTML = '';
-
-    quizzesCreated.forEach((quiz) => {
-        const quizButton = document.createElement('button');
-        quizButton.classList.add('quiz-button');
-
-        quizButton.textContent = `${quiz.title} by ${quiz.creator}`;
-
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
-        editButton.addEventListener('click', () => {
-            // Handle edit functionality
-            alert(`Edit ${quiz.title}`);
-        });
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'X';
-        deleteButton.addEventListener('click', () => {
-            // Handle delete functionality
-            alert(`Delete ${quiz.title}`);
-        });
-
-        quizButton.appendChild(editButton);
-        quizButton.appendChild(deleteButton);
-
-        quizContent.appendChild(quizButton);
-    });
-}
-
-function initialize() {
-    toggleQuizTaken();
-    toggleMyQuiz();
-    toggleQuizTaken();
-}
-
-initialize();
-
 
 
 
@@ -204,8 +149,6 @@ function setQuizes(user) {
                 link.innerHTML = `Quiz: ${quiz.title}`
                 element.appendChild(link)
                 quizList.appendChild(element)
-
-                // TODO Klea: Quiz entries bauen/verschönern
             }
         }
     };

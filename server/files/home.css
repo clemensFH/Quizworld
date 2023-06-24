@@ -6,6 +6,7 @@
     --primary-color: rgb(18, 93, 255);
     --secondary-color: rgb(0, 102, 255);
     --color3: rgb(100, 102, 255);
+    --color4: rgb(100, 122, 255);;
     --text-color: #fff;
     --background-color: rgb(29, 26, 26);
 }
@@ -230,3 +231,14 @@ nav button:last-child {
     border-color: rgb(41, 232, 111);
     background-color: rgba(41, 232, 111, 0.2);
 }
+
+#add-button{
+    background:  var(--color3);
+}
+
+.blue_btn:hover {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 0 rgba(100, 122, 255, 0.6);
+    transform: scale(1.03);
+}
+

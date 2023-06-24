@@ -1,4 +1,4 @@
-const quizzes = [
+/*const quizzes = [
     {
         id: 1,
         name: 'Movie Quiz',
@@ -240,8 +240,9 @@ const quizzes = [
         description: 'Embark on a delightful adventure into the world of Cartoons & Animation with our Cartoon & Animation Quiz! Journey through a nostalgic realm filled with beloved characters, colorful animation, and memorable moments. Test your knowledge of classic cartoons and modern animated series as you dive into questions about iconic characters, animated films, and animated TV shows. From timeless classics to contemporary favorites, this quiz will challenge your expertise in the world of animated entertainment. Whether you\'re a fan of hand-drawn animation, computer-generated imagery, or stop-motion animation, this quiz is designed to entertain and engage fans of all ages. So, gather your favorite animated characters and get ready to put your cartoon knowledge to the test in our thrilling Cartoon & Animation Quiz!'
     }
     // Add more quizzes as needed
-];
+];*/
 
+const { Quiz } = require('../models');
 
 const question = document.querySelector('#question');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
@@ -346,4 +347,4 @@ const shuffleArray = (array) => {
 };
 
 // Start the game with the first quiz
-startGame(quizzes[2]);
+startGame(Quiz[3]);

@@ -11,7 +11,7 @@
 
 <body>
 <div class="container">
-    <button id="btn-back" onclick="goBack()">&#8592;</button>
+    <button id="back-btn" onclick="goBack()">&#8592;</button>
     <h1 id="quiz-title">Profile</h1>
     <div class="profile-info">
         <div class="info-row">
@@ -26,20 +26,23 @@
         </div>
         <div class="info-row">
             <span class="info-label">Since:</span>
-            <span id="since">June 21, 2023</span>
+            <span id="since">XXX</span>
         </div>
         <div class="info-row">
             <span class="info-label">Quiz taken:</span>
-            <span id="quizzes-taken">5</span>
+            <span id="quizzes-taken">X</span>
         </div>
         <div class="info-row">
             <span class="info-label">Quiz created:</span>
-            <span id="quizzes-created">10</span>
+            <span id="quizzes-created">X</span>
         </div>
         <div class="info-row">
             <span class="info-label">Complete 100%:</span>
-            <span id="complete-100">3</span>
+            <span id="complete-100">X</span>
         </div>
+
+    </div>
+    <div class="logout-delete-container">
         <button class="logout-button" onclick="logout()">Log out</button>
         <button class="delete-account-button" onclick="deleteAccount()">Delete Account</button>
     </div>
@@ -50,7 +53,6 @@
         </div>
         <div id="quiz-content" class="quiz-content"></div>
     </div>
-    <button class="home-button" onclick="goHome()">Home</button>
 </div>
 <script src="profile.js"></script>
 </body>

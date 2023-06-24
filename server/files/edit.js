@@ -90,7 +90,7 @@ xhr.onload = function () {
             const form = document.createElement("form")
             const container = document.createElement("div")
             const heading = document.createElement("h5")
-            heading.innerHTML = "Frage " + i
+            heading.innerHTML = "Question " + i
             container.appendChild(heading)
 
             const questionText = document.createElement("textarea")
@@ -99,33 +99,70 @@ xhr.onload = function () {
             questionText.required = true
             container.appendChild(questionText)
 
-            var j = 1
+            var j = 1;
             for (const option in question.options) {
-                const optcon = document.createElement("div")
-                const optionText = document.createElement("input")
-                optionText.value = option
-                optionText.id = `Q${i}O${j}_Text`
-                optionText.required = true
-                optcon.appendChild(optionText)
+                /*const optcon = document.createElement("div");
+                const optionText = document.createElement("input");
+                optionText.value = option;
+                optionText.className = "option-text"; // Add the CSS class
+                optionText.id = `Q${i}O${j}_Text`;
+                optionText.required = true;
+                optcon.appendChild(optionText);
 
-                const optionTrue = document.createElement("input")
-                optionTrue.type = "radio"
-                optionTrue.name = `Q${i}_Result`
-                optionTrue.id = `Q${i}O${j}_Result`
-                optionTrue.required = true
-                if(question.options[option]){
-                    optionTrue.checked = question.options[option] === true
+                const optionTrue = document.createElement("input");
+                optionTrue.type = "radio";
+                optionTrue.className = "option-true"; // Add the CSS class
+                optionTrue.name = `Q${i}_Result`;
+                optionTrue.id = `Q${i}O${j}_Result`;
+                optionTrue.required = true;
+                if (question.options[option]) {
+                    optionTrue.checked = question.options[option] === true;
                 }
-                optcon.appendChild(optionTrue)
+                optcon.appendChild(optionTrue);
 
-                container.appendChild(optcon)
-                j++
+                container.appendChild(optcon);*/
+                const optcon = document.createElement("div");
+                optcon.classList.add("option-container");
+
+                const optionText = document.createElement("input");
+                optionText.value = option;
+                optionText.id = `Q${i}O${j}_Text`;
+                optionText.required = true;
+                optionText.classList.add("option-text");
+                optcon.appendChild(optionText);
+
+                const optionTrueContainer = document.createElement("div");
+                optionTrueContainer.classList.add("option-true-container");
+
+                const optionTrueInput = document.createElement("input");
+                optionTrueInput.type = "radio";
+                optionTrueInput.name = `Q${i}_Result`;
+                optionTrueInput.id = `Q${i}O${j}_Result`;
+                optionTrueInput.required = true;
+                optionTrueInput.classList.add("option-true-input");
+                if (question.options[option]) {
+                    optionTrueInput.checked = question.options[option] === true;
+                }
+                optionTrueContainer.appendChild(optionTrueInput);
+
+                const optionTrueLabel = document.createElement("label");
+                optionTrueLabel.classList.add("option-true-label");
+                optionTrueLabel.setAttribute("for", `Q${i}O${j}_Result`);
+                optionTrueContainer.appendChild(optionTrueLabel);
+
+                optcon.appendChild(optionTrueContainer);
+
+                container.appendChild(optcon);
+                j++;
             }
+
             form.appendChild(container)
             body.appendChild(form)
             i++
         }
     }
 }
+
+
 xhr.open("GET", "quizes/" + quizID)
 xhr.send()
