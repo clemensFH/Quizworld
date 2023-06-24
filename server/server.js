@@ -130,7 +130,9 @@ app.put("/quiz", function (req, res){
     PUT Quiz erstellen
  */
 app.post("/quiz", function (req, res){
-
+    const quiz = req.body
+    console.log("POST " + quiz)
+    QuizWorldModel.addQuiz(quiz)
 })
 
 

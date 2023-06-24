@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--    <link rel="stylesheet" href="home.css"/>-->
+    <script src="create.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <input type="hidden" id="id" required/>
+    <input type="hidden" id="date" required/>
+    <input type="hidden" id="creatorID" required/>
+    <div>
+        <label for="title">Titel</label>
+        <input type="text" id="title" required/>
+    </div>
+    <div>
+        <label for="category">Kategorie</label>
+        <input type="text" id="category" required/>
+        <!--            dropdown-->
+    </div>
+    <div>
+        <label for="description">Beschreibung</label>
+        <textarea id="description" required=""></textarea>
+<!--        <input type="text" id="description" required/>-->
+    </div>
+</form>
+<div id="questions">
+    <div id="Q1_Container">
+        <form>
+            <div><h5>Frage 1</h5><textarea id="Q1_Text" required=""></textarea>
+                <div><input id="Q1O1_Text" required=""><input type="radio" name="Q1_Result" id="Q1O1_Result" required
+                                                              checked>
+                </div>
+                <div><input id="Q1O2_Text" required=""><input type="radio" name="Q1_Result" id="Q1O2_Result" required>
+                </div>
+                <div><input id="Q1O3_Text" required=""><input type="radio" name="Q1_Result" id="Q1O3_Result" required>
+                </div>
+                <div><input id="Q1O4_Text" required=""><input type="radio" name="Q1_Result" id="Q1O4_Result" required>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="Q2_Container">
+
+    </div>
+</div>
+<button type="button" onclick="addQuestion()">Add Question</button>
+
+<button type="button" onclick="postQuiz()">Save Quiz</button>
+</body>
+</html>
