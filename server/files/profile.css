@@ -33,6 +33,17 @@ body {
     padding: 20px;
 }
 
+#back-btn{
+    width: 8rem;
+    font-size: 5rem;
+}
+
+#trash{
+    font-size: 2rem;
+    position: relative;
+    bottom: 0.25rem;
+}
+
 .profile-info {
     margin-bottom: 20px;
     font-size: 5rem;
@@ -57,7 +68,8 @@ body {
 .edit-icon {
     background: none;
     border: none;
-    color: #007bff;
+    font-size: 3rem;
+    color: var(--primary-color);
     cursor: pointer;
 }
 
