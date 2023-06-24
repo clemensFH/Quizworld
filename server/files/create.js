@@ -1,33 +1,51 @@
 let qnr = 2
 function addQuestion(){
-    const questionsContainer = document.getElementById("questions")
+    const questionsContainer = document.getElementById("questions-container")
     const container = document.getElementById("Q"+qnr+"_Container")
-    const innerDiv = document.createElement("div")
     const form = document.createElement("form")
+    const innerDiv = document.createElement("div")
 
     const heading = document.createElement("h5")
-    heading.innerHTML = "Frage " + qnr
+    heading.innerHTML = "Question " + qnr
     innerDiv.appendChild(heading)
 
     const questionText = document.createElement("textarea")
     questionText.id = `Q${qnr}_Text`
     questionText.required = true
+    questionText.classList.add("question-text");
     innerDiv.appendChild(questionText)
 
-    for (let i= 1; i<5; i++){
-        const optcon = document.createElement("div")
-        const optionText = document.createElement("input")
-        optionText.id = `Q${qnr}O${i}_Text`
-        optionText.required = true
-        optcon.appendChild(optionText)
+    for (let i = 1; i < 5; i++) {
+        const optcon = document.createElement("div");
+        optcon.classList.add("option-container");
 
-        const optionTrue = document.createElement("input")
-        optionTrue.type = "radio"
-        optionTrue.name = `Q${qnr}_Result`
-        optionTrue.id = `Q${qnr}O${i}_Result`
-        optionTrue.required = true
-        if(i === 1) {optionTrue.checked = true}
-        optcon.appendChild(optionTrue)
+        const optionText = document.createElement("input");
+        optionText.id = `Q${qnr}O${i}_Text`;
+        optionText.required = true;
+        optionText.classList.add("option-text");
+        optcon.appendChild(optionText);
+
+        const optionTrueContainer = document.createElement("div");
+        optionTrueContainer.classList.add("option-true-container");
+
+        const optionTrue = document.createElement("input");
+        optionTrue.type = "radio";
+        optionTrue.name = `Q${qnr}_Result`;
+        optionTrue.id = `Q${qnr}O${i}_Result`;
+        optionTrue.required = true;
+        optionTrue.classList.add("option-true-input");
+        if (i === 1) {
+            optionTrue.checked = true;
+        }
+        optionTrueContainer.appendChild(optionTrue);
+
+        const optionTrueLabel = document.createElement("label");
+        optionTrueLabel.classList.add("option-true-label");
+        optionTrueLabel.setAttribute("for", `Q${qnr}O${i}_Result`);
+        optionTrueContainer.appendChild(optionTrueLabel);
+
+        optcon.appendChild(optionTrueContainer);
+
         innerDiv.appendChild(optcon)
     }
     form.appendChild(innerDiv)
