@@ -58,9 +58,9 @@ q1 = new Question("1?", opt1)
 q2 = new Question("2?", opt2)
 q3 = new Question("3?", opt3)
 
-Quiz1 = new Quiz("Test", ["Science", "Film"], new Date("2023-03-06"), "Best physics quiz",
+Quiz1 = new Quiz("Test", ["Science", "Film"], new Date("2023-03-06").toLocaleDateString("de-DE"), "Best physics quiz",
                     user1.id,  [q1,q2], 2)
-Quiz2 = new Quiz("Best", ["Sports"], new Date("2023-02-05"), "Best sports quiz",
+Quiz2 = new Quiz("Best", ["Sports"], new Date("2023-02-05").toLocaleDateString("de-DE"), "Best sports quiz",
     user2.id, [q3,q2], 2)
 
 QuizworldQuiz1 = new QuizworldQuiz('Movie Quiz',

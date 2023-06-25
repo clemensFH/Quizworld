@@ -54,6 +54,12 @@ app.get("/", function(req, res){
         res.sendFile(__dirname + "/files/index.html")
 })
 
+app.get('/logout',(req,res) => {
+    req.session.destroy();
+    console.log("logout")
+    res.redirect('/');
+});
+
 
 // Serve static content in directory 'files'
 app.use(express.static(path.join(__dirname, 'files')));

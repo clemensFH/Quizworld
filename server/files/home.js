@@ -1,3 +1,19 @@
+function logout(){
+    const xhrlogout = new XMLHttpRequest();
+    xhrlogout.onload = function () {
+        if (xhrlogout.status === 200) {
+            window.location.reload()
+        }
+    };
+    xhrlogout.open("GET", "/logout")
+    xhrlogout.send();
+}
+
+function addQuiz() {
+    window.location.href = "create.html"
+}
+
+
 window.onload = function () {
     const xhr2 = new XMLHttpRequest();
     xhr2.onload = function () {
@@ -112,7 +128,7 @@ window.onload = function () {
                     // Date
                     const date = document.createElement("p");
                     date.className = "quiz-preview-date quiz-preview-item";
-                    date.innerHTML = new Date(quiz.date).toLocaleDateString("de-DE");
+                    date.innerHTML = quiz.date
                     previewHeader.appendChild(date);
 
                     container.appendChild(previewHeader);

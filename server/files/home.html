@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="home.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
-    <script type="module" src="home.js"></script>
+    <script src="home.js"></script>
     <title>Quizworld</title>
 </head>
 
@@ -19,8 +19,9 @@
         <h4 style="font-size: 2.5rem; color: white;">Categories</h4>
         <div id="category-list" class="category-list"></div>
     </div>
-    <button id="add-button">+</button>
+    <button id="add-button" onclick="addQuiz()">+</button>
     <button id="profile-button">Profile</button>
+    <button id="btn-logout" onclick="logout()">Logut</button>
 </nav>
 <main class="quiz-previews-container"></main>
 </body>

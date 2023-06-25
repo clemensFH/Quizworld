@@ -1,3 +1,20 @@
+var user;
+
+const xhr = new XMLHttpRequest();
+xhr.onload = function () {
+    if(xhr.status === 200) {
+        user = JSON.parse(xhr.responseText)
+        //console.log(user)
+        const userID_input = document.getElementById("creatorID")
+        userID_input.value = user.id
+
+        const date_input = document.getElementById("date")
+        date_input.value = new Date(Date.now()).toLocaleDateString("de-DE");
+    }
+};
+xhr.open("GET", "/profile")
+xhr.send();
+
 let qnr = 2
 function addQuestion(){
     const questionsContainer = document.getElementById("questions-container")
