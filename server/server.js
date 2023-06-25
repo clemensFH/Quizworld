@@ -1,4 +1,5 @@
 const express = require('express')
+const axios = require('axios');
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 const path = require('path')
@@ -63,6 +64,17 @@ app.get('/logout',(req,res) => {
 
 // Serve static content in directory 'files'
 app.use(express.static(path.join(__dirname, 'files')));
+
+
+app.get("/joke", function (req, res){
+    axios.get('https://api.chucknorris.io/jokes/random')
+        .then(function (response) {
+            res.send(response.data.value)
+        })
+        .catch(function (error) {
+            console.log("error loading joke: " + error);
+        })
+});
 
 
 /*
