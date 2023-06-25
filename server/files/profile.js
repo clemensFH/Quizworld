@@ -38,9 +38,6 @@ function goBack() {
     window.history.back();
 }
 
-function goHome() {
-    window.location.href = 'home.html';
-}
 
 function toggleUsernameEdit() {
     const usernameSection = document.getElementById('username');
@@ -74,12 +71,12 @@ function togglePasswordEdit() {
 
 
 function logout() {
-    // Perform logout functionality
+    //TODO Perform logout functionality
     alert('Logged out');
 }
 
 function deleteAccount() {
-    // Perform account deletion functionality
+    //TODO Perform account deletion functionality
     alert('Account deleted');
 }
 

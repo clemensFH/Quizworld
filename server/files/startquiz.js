@@ -1,6 +1,7 @@
 window.onload = function () {
     const id = new URLSearchParams(window.location.search).get("quizId");
     const xhr = new XMLHttpRequest()
+
     xhr.onload = function () {
         if (xhr.status === 200) {
             const quiz = JSON.parse(xhr.responseText)
@@ -19,7 +20,11 @@ window.onload = function () {
 
             // Cat
             const cat = document.getElementById("quiz-category")
-            cat.innerHTML = quiz.category
+            cat.innerHTML = quiz.category.join(", ");
+
+            // Number of Questions
+            const NoQ = document.getElementById("quiz-question-count")
+            NoQ.innerHTML = quiz.numberOfQuestions
 
             // Desc
             const desc = document.getElementById("quiz-info-desc")
@@ -28,7 +33,7 @@ window.onload = function () {
             // take quiz
             const btn = document.getElementById("btn-take-quiz")
             btn.addEventListener("click", function (){
-                location.href = "game.html"
+                location.href = "game.html?quizId=" + quiz.id;
             })
 
             const btnBack = document.getElementById("back-btn")
@@ -45,7 +50,3 @@ window.onload = function () {
     xhr.open("GET", "/quizes/" + id)
     xhr.send()
 }
-
-
-
-

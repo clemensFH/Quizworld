@@ -77,7 +77,9 @@ window.onload = function () {
             function getUniqueCategories(quizzes) {
                 const categories = new Set();
                 quizzes.forEach((quiz) => {
-                    categories.add(quiz.category);
+                    quiz.category.forEach((category) => {
+                        categories.add(category);
+                    });
                 });
                 return Array.from(categories);
             }
@@ -86,9 +88,17 @@ window.onload = function () {
                 return quizzes.filter((quiz) => {
                     const matchesSearch = quiz.title.toLowerCase().includes(searchTerm);
                     const matchesCategory =
-                        selectedCategories.length === 0 || selectedCategories.includes(quiz.category);
+                        selectedCategories.length === 0 || quiz.category.some((category) => selectedCategories.includes(category));
                     return matchesSearch && matchesCategory;
                 });
+            }
+
+            function getLimitedDescription(description, limit) {
+                if (description.length <= limit) {
+                    return description;
+                } else {
+                    return description.slice(0, limit) + '...';
+                }
             }
 
             function displayQuizzes(quizzes) {
@@ -98,45 +108,41 @@ window.onload = function () {
                     const container = document.createElement("div");
                     container.className = "quiz-preview-container";
 
-                    // Preview header
-                    const previewHeader = document.createElement("div");
-                    previewHeader.className = "quiz-preview-header";
+                    // Title and Creator
+                    const titleCreatorWrapper = document.createElement("div");
+                    titleCreatorWrapper.className = "quiz-preview-title-creator-wrapper";
 
-                    // Title
                     const title = document.createElement("h3");
                     title.innerHTML = quiz.title;
                     title.className = "quiz-preview-title quiz-preview-item";
-                    previewHeader.appendChild(title);
+                    titleCreatorWrapper.appendChild(title);
 
-                    // Username Container
-                    const usernameContainer = document.createElement("div");
-                    usernameContainer.className = "quiz-preview-username-container";
+                    const creatorDate = document.createElement("div");
+                    creatorDate.className = "quiz-preview-creator-date";
 
-                    // Username
-                    const username = document.createElement("p");
-                    username.className = "quiz-preview-username quiz-preview-item";
-                    username.innerHTML = "by " + quiz.creatorID;
-                    usernameContainer.appendChild(username);
-                    previewHeader.appendChild(usernameContainer);
+                    const creator = document.createElement("p");
+                    creator.innerHTML = "by " + quiz.creatorID;
+                    creator.className = "quiz-preview-creator quiz-preview-item";
+                    creatorDate.appendChild(creator);
+
+                    const date = document.createElement("p");
+                    date.innerHTML = quiz.date
+                    date.className = "quiz-preview-date quiz-preview-item";
+                    creatorDate.appendChild(date);
+
+                    titleCreatorWrapper.appendChild(creatorDate);
+                    container.appendChild(titleCreatorWrapper);
 
                     // Categories
                     const categories = document.createElement("p");
-                    categories.innerHTML = quiz.category;
-                    categories.className = "quiz-preview-categories quiz-preview-item";
-                    previewHeader.appendChild(categories);
-
-                    // Date
-                    const date = document.createElement("p");
-                    date.className = "quiz-preview-date quiz-preview-item";
-                    date.innerHTML = quiz.date
-                    previewHeader.appendChild(date);
-
-                    container.appendChild(previewHeader);
+                    categories.innerHTML = quiz.category.join(", ");
+                    categories.className = "quiz-preview-category quiz-preview-item";
+                    container.appendChild(categories);
 
                     // Description
                     const desc = document.createElement("p");
-                    desc.className = "quiz-preview-desc";
-                    desc.innerHTML = quiz.description;
+                    desc.className = "quiz-preview-description";
+                    desc.innerHTML = getLimitedDescription(quiz.description, 100);
                     container.appendChild(desc);
 
                     container.addEventListener("click", function () {

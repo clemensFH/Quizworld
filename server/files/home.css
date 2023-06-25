@@ -232,7 +232,7 @@ nav button:last-child {
     background-color: rgba(41, 232, 111, 0.2);
 }
 
-#add-button{
+#add-button, #btn-logout{
     background:  var(--color3);
 }
 
