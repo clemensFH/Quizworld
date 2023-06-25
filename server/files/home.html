@@ -3,15 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="home.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="home.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
+          integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
     <script src="home.js"></script>
     <title>Quizworld</title>
 </head>
 
 <body>
 <h1>Quizworld</h1>
+<div id="joke-container" style="width: 30%;
+    margin: 0 auto 20px auto;
+    border: 3px solid white;
+    padding: 8px;">
+    <p style="color: white">Here is a funny Chuck Norris joke for you:</p>
+    <p style="color: white" id="joke"></p>
+</div>
 <nav>
     <input type="text" placeholder="Search quizzes">
     <button id="filter-button">Filter</button>

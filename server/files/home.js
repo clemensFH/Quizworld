@@ -15,6 +15,17 @@ function addQuiz() {
 
 
 window.onload = function () {
+    const xhrjoke = new XMLHttpRequest();
+    xhrjoke.onload = function (){
+        if(xhrjoke.status === 200){
+            const joke_p = document.getElementById("joke")
+            joke_p.innerHTML = xhrjoke.responseText
+        }
+    };
+    xhrjoke.open("GET", "/joke")
+    xhrjoke.send()
+
+
     const xhr2 = new XMLHttpRequest();
     xhr2.onload = function () {
         if(xhr2.status === 200) {
