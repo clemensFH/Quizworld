@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="startquiz.css">
     <link rel="stylesheet" href="profile.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
+          integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
     <title>Profile</title>
 </head>
 
@@ -18,19 +19,27 @@
         <div class="info-row">
             <span class="info-label">Username:</span>
             <span id="username">User123</span>
-            <button class="edit-icon" onclick="toggleUsernameEdit()"><i class="fas fa-pen"></i></button>
+            <div id="username-edit" style="display: none;">
+                <input type="text" id="username-input" placeholder="Enter new username">
+            </div>
+            <button class="edit-icon" id="username-edit-icon" onclick="toggleUsernameEdit()"><i
+                    class="fas fa-pen"></i></button>
         </div>
         <div class="info-row">
             <span class="info-label">Password:</span>
             <span id="password">********</span>
-            <button class="edit-icon" onclick="togglePasswordEdit()"><i class="fas fa-pen"></i></button>
+            <div id="password-edit" style="display: none;">
+                <input type="text" id="password-input" placeholder="Enter new password">
+            </div>
+            <button class="edit-icon" id="password-edit-icon" onclick="togglePasswordEdit()"><i
+                    class="fas fa-pen"></i></button>
         </div>
         <div class="info-row">
             <span class="info-label">Since:</span>
             <span id="since">XXX</span>
         </div>
         <div class="info-row">
-            <span class="info-label">Quiz taken:</span>
+            <span id="quizzes-taken1" class="info-label">Quiz taken:</span>
             <span id="quizzes-taken">X</span>
         </div>
         <div class="info-row">
@@ -41,11 +50,11 @@
             <span class="info-label">Complete 100%:</span>
             <span id="complete-100">X</span>
         </div>
-
     </div>
     <div class="logout-delete-container">
-        <button class="logout-button" onclick="logout()">Log out</i></button>
-        <button class="delete-account-button" onclick="deleteAccount()">Delete Account <i id="trash" class="fas fa-trash"></i></button>
+        <button class="logout-button" onclick="logout()">Log out</button>
+        <button class="delete-account-button" onclick="deleteAccount()">Delete Account <i id="trash"
+                                                                                          class="fas fa-trash"></i></button>
     </div>
     <div class="quiz-section">
         <div class="quiz-buttons">
@@ -59,13 +68,6 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
 
 
 <!--<!DOCTYPE html>

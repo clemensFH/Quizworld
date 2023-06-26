@@ -1,12 +1,18 @@
 var user;
 
+// TODO Profile needs to save Quiz!
+
 const xhr = new XMLHttpRequest();
 xhr.onload = function () {
     if (xhr.status === 200) {
         user = JSON.parse(xhr.responseText);
         console.log(user);
-        const heading = document.getElementById("username");
-        heading.innerHTML = user.name;
+        const username = document.getElementById("username");
+        username.innerHTML = user.name;
+        const password = document.getElementById("password");
+        password.innerHTML = user.password;
+        const date = document.getElementById("since");
+        date.innerHTML = user.date;
         setQuizzes(user);
     }
 };
@@ -38,19 +44,24 @@ function goBack() {
     window.history.back();
 }
 
-
 function toggleUsernameEdit() {
     const usernameSection = document.getElementById('username');
     const usernameEditSection = document.getElementById('username-edit');
     const usernameInput = document.getElementById('username-input');
+    const usernameEditIcon = document.getElementById('username-edit-icon');
 
     if (usernameSection.style.display === 'none') {
         usernameSection.style.display = 'inline';
         usernameEditSection.style.display = 'none';
+        usernameEditIcon.innerHTML = '<i class="fas fa-pen"></i>';
+        // Save the updated username
+        const newUsername = usernameInput.value;
+        usernameSection.textContent = newUsername;
     } else {
         usernameSection.style.display = 'none';
         usernameEditSection.style.display = 'inline';
-        usernameInput.value = usernameSection.textContent;
+        usernameInput.value = usernameSection.textContent; // Set input value to current username
+        usernameEditIcon.innerHTML = '<i class="fas fa-check"></i>';
     }
 }
 
@@ -58,25 +69,37 @@ function togglePasswordEdit() {
     const passwordSection = document.getElementById('password');
     const passwordEditSection = document.getElementById('password-edit');
     const passwordInput = document.getElementById('password-input');
+    const passwordEditIcon = document.getElementById('password-edit-icon');
 
     if (passwordSection.style.display === 'none') {
         passwordSection.style.display = 'inline';
         passwordEditSection.style.display = 'none';
+        passwordEditIcon.innerHTML = '<i class="fas fa-pen"></i>';
+        // Save the updated password
+        const newPassword = passwordInput.value;
+        passwordSection.textContent = newPassword;
     } else {
         passwordSection.style.display = 'none';
         passwordEditSection.style.display = 'inline';
         passwordInput.value = passwordSection.textContent;
+        passwordEditIcon.innerHTML = '<i class="fas fa-check"></i>';
     }
 }
 
-
 function logout() {
-    //TODO Perform logout functionality
-    alert('Logged out');
+    // TODO After logout it needs to go back to index.html (Provisorisch:)
+    const xhrlogout = new XMLHttpRequest();
+    xhrlogout.onload = function () {
+        if (xhrlogout.status === 200) {
+            window.location.reload();
+        }
+    };
+    xhrlogout.open("GET", "/logout");
+    xhrlogout.send();
 }
 
 function deleteAccount() {
-    //TODO Perform account deletion functionality
+    //TODO Clemens: Perform account deletion functionality
     alert('Account deleted');
 }
 
@@ -109,6 +132,7 @@ function toggleMyQuiz() {
 
     document.getElementById('quiz-taken-button').classList.remove('active');
 }
+
 
 
 

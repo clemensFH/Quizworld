@@ -22,12 +22,26 @@ function addQuestion(){
     const form = document.createElement("form")
     const innerDiv = document.createElement("div")
 
-    const heading = document.createElement("h5")
-    heading.innerHTML = "Question " + qnr
-    innerDiv.appendChild(heading)
+    const questionWrapper = document.createElement("div");
+    questionWrapper.classList.add("question-wrapper");
+
+    const heading = document.createElement("h5");
+    heading.innerHTML = "Question " + qnr;
+    questionWrapper.appendChild(heading);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add("delete-button");
+    deleteButton.addEventListener("click", function() {
+        deleteQuestion(qnr);
+    });
+    questionWrapper.appendChild(deleteButton);
+
+    innerDiv.appendChild(questionWrapper);
 
     const questionText = document.createElement("textarea")
     questionText.id = `Q${qnr}_Text`
+    questionText.placeholder = "Type in Question..."
     questionText.required = true
     questionText.classList.add("question-text");
     innerDiv.appendChild(questionText)
@@ -38,6 +52,7 @@ function addQuestion(){
 
         const optionText = document.createElement("input");
         optionText.id = `Q${qnr}O${i}_Text`;
+        optionText.placeholder = "Type in Choice of Question..."
         optionText.required = true;
         optionText.classList.add("option-text");
         optcon.appendChild(optionText);

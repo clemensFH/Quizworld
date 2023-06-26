@@ -88,12 +88,28 @@ xhr.onload = function () {
         var i = 1
         for (var question of quiz.questions) {
             const form = document.createElement("form")
-            const container = document.createElement("div")
-            const heading = document.createElement("h5")
-            heading.innerHTML = "Question " + i
-            container.appendChild(heading)
+            const container = document.createElement("div");
+
+            const questionWrapper = document.createElement("div");
+            questionWrapper.classList.add("question-wrapper");
+
+            const heading = document.createElement("h5");
+            heading.innerHTML = "Question " + i;
+            questionWrapper.appendChild(heading);
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.classList.add("delete-button");
+            deleteButton.addEventListener("click", function() {
+                deleteQuestion(i);
+            });
+
+            questionWrapper.appendChild(deleteButton);
+            container.appendChild(questionWrapper)
+
 
             const questionText = document.createElement("textarea")
+            questionText.placeholder = "Type in Question..."
             questionText.value = question.text
             questionText.id = `Q${i}_Text`
             questionText.required = true
@@ -125,6 +141,7 @@ xhr.onload = function () {
                 optcon.classList.add("option-container");
 
                 const optionText = document.createElement("input");
+                optionText.placeholder = "Type in Choice of Question..."
                 optionText.value = option;
                 optionText.id = `Q${i}O${j}_Text`;
                 optionText.required = true;

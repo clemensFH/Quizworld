@@ -165,7 +165,11 @@ body {
     transform: scale(1.03);
 }
 
-
+#username-input, #password-input{
+    background-color: var(--background-color);
+    font-size: 2rem;
+    border-radius: 5px;
+}
 
 /* Media Queries */
 @media screen and (max-width: 768px) {

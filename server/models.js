@@ -1,9 +1,10 @@
 class User {
-    constructor(name, password) {
+    constructor(name, password, date) {
         this.id = User.idpool
         User.idpool++
         this.name = name
         this.password = password
+        this.date = date
     }
 
     static idpool = 1
@@ -38,9 +39,9 @@ opt1= {"A": false, "B": false, "C": true, "D": false}
 opt2 = {"A": true, "B": false, "C": false, "D": false}
 opt3 = {"A": false, "B": true, "C": false, "D": false}
 
-user1 = new User("Quizworld", "Quizworld")
-user2 = new User("John Wick", "asd123")
-user3 = new User("Mia Mahlkova", "123asd")
+user1 = new User("Quizworld", "Quizworld", new Date("2023-01-01").toLocaleDateString("de-DE"))
+user2 = new User("John Wick", "asd123", new Date("2023-04-13").toLocaleDateString("de-DE"))
+user3 = new User("Mia Mahlkova", "123asd", new Date("2023-01-05").toLocaleDateString("de-DE"))
 
 q1 = new Question("1?", opt1)
 q2 = new Question("2?", opt2)

@@ -15,49 +15,61 @@
     <input type="hidden" id="creatorID" required/>
     <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" id="title" required/>
+        <input type="text" id="title" placeholder="Type in Title..." required/>
     </div>
     <div class="form-group">
         <label for="category">Category</label>
-        <input type="text" id="category" required/>
+        <input type="text" id="category" placeholder="Type in Categories..." required/>
         <!-- Dropdown -->
     </div>
     <div class="form-group">
         <label for="description">Description</label>
-        <textarea id="description" required></textarea>
+        <textarea id="description" placeholder="Type in Description..." required></textarea>
     </div>
 </form>
 <div id="questions-container" class="form-group">
     <div id="Q1_Container">
         <form>
             <div class="form-group">
-                <h5>Question 1</h5>
-                <textarea id="Q1_Text" class="question-text" required></textarea>
+                <div class="heading-container">
+                    <h5>Question 1</h5>
+                    <button class="delete-button">Delete</button>
+                </div>
+                <textarea id="Q1_Text" class="question-text" placeholder="Type in Question..." required></textarea>
             </div>
-            <div class="form-group">
-                <input id="Q1O1_Text" class="option-text" required>
-                <input type="radio" name="Q1_Result" class="option-true-input" id="Q1O1_Result" required checked>
-                <label class="option-true-label" for="Q1O1_Result"></label>
+            <div class="form-group option-container">
+                <input id="Q1O1_Text" class="option-text" placeholder = "Type in Choice of Question..." required>
+                <div class="option-true-container">
+                    <input type="radio" name="Q1_Result" class="option-true-input" id="Q1O1_Result" required checked>
+                    <label class="option-true-label" for="Q1O1_Result"></label>
+                </div>
             </div>
-            <div class="form-group">
-                <input id="Q1O2_Text" class="option-text" required>
-                <input type="radio" name="Q1_Result" class="option-true-input" id="Q1O2_Result" required>
-                <label class="option-true-label" for="Q1O2_Result"></label>
+            <div class="form-group option-container">
+                <input id="Q1O2_Text" class="option-text" placeholder = "Type in Choice of Question..." required>
+                <div class="option-true-container">
+                    <input type="radio" name="Q1_Result" class="option-true-input" id="Q1O2_Result" required>
+                    <label class="option-true-label" for="Q1O2_Result"></label>
+                </div>
             </div>
-            <div class="form-group">
-                <input id="Q1O3_Text" class="option-text" required>
-                <input type="radio" name="Q1_Result" class="option-true-input" id="Q1O3_Result" required>
-                <label class="option-true-label" for="Q1O3_Result"></label>
+            <div class="form-group option-container">
+                <input id="Q1O3_Text" class="option-text" placeholder = "Type in Choice of Question..." required>
+                <div class="option-true-container">
+                    <input type="radio" name="Q1_Result" class="option-true-input" id="Q1O3_Result" required>
+                    <label class="option-true-label" for="Q1O3_Result"></label>
+                </div>
             </div>
-            <div class="form-group">
-                <input id="Q1O4_Text" class="option-text" required>
-                <input type="radio" name="Q1_Result" class="option-true-input" id="Q1O4_Result" required>
-                <label class="option-true-label" for="Q1O4_Result"></label>
+            <div class="form-group option-container">
+                <input id="Q1O4_Text" class="option-text" placeholder = "Type in Choice of Question..." required>
+                <div class="option-true-container">
+                    <input type="radio" name="Q1_Result" class="option-true-input" id="Q1O4_Result" required>
+                    <label class="option-true-label" for="Q1O4_Result"></label>
+                </div>
             </div>
         </form>
     </div>
     <div id="Q2_Container"></div>
 </div>
+
 <button id="addQuestion" type="button" onclick="addQuestion()">Add Question</button>
 <button id="saveQuestion" type="button" onclick="postQuiz()">Save Quiz</button>
 

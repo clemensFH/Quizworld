@@ -1,7 +1,4 @@
-
-// TODO
-
-const question = document.querySelector('#question');
+const questionElement = document.querySelector('#question');
 const choices = Array.from(document.querySelectorAll('.choice-text'));
 const progressText = document.querySelector('#progressText');
 const scoreText = document.querySelector('#score');
@@ -13,169 +10,84 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
 
-const quizType = quiz.apiURL ? 'api' : 'questions';
+let questions = [
+    {
+        question: 'What is 2+2?',
+        options: {
+            '2': false,
+            '4': true,
+            '21': false,
+            '17': false,
+        },
+    },
+    {
+        question: 'What animal can get infected by human diseases?',
+        options: {
+            Lion: false,
+            Bat: false,
+            Gorillas: true,
+            Deer: false,
+        },
+    },
+    // Add more questions...
+];
 
-if (quizType === 'api') {
+function startGame() {
+    questionCounter = 0;
+    score = 0;
+    availableQuestions = [...questions];
+    getNewQuestion();
+}
 
-
-    const SCORE_POINTS = 100;
-    let maxQuestions = 0;
-
-    const startGame = (quiz) => {
-        questionCounter = 0;
-        score = 0;
-        maxQuestions = quiz.numberOfQuestions;
-        availableQuestions = [];
-        fetchQuestions(quiz);
-    };
-
-    async function fetchQuestions(quiz) {
-        try {
-            const response = await fetch(quiz.apiURL);
-            const data = await response.json();
-            availableQuestions = data.results.map((questionData) => {
-                return {
-                    question: he.decode(questionData.question),
-                    choices: shuffleArray([
-                        he.decode(questionData.correct_answer),
-                        ...questionData.incorrect_answers.map((answer) => he.decode(answer))
-                    ]),
-                    answer: questionData.correct_answer
-                };
-            });
-            startNextQuestion();
-        } catch (error) {
-            console.error('Failed to fetch questions:', error);
-        }
+function getNewQuestion() {
+    if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+        localStorage.setItem('mostRecentScore', score);
+        return window.location.assign('/end.html');
     }
+    questionCounter++;
+    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
+    progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
 
-    const startNextQuestion = () => {
-        if (questionCounter >= maxQuestions) {
-            localStorage.setItem('mostRecentScore', score);
-            return window.location.assign('/end.html');
-        }
+    const questionsIndex = Math.floor(Math.random() * availableQuestions.length);
+    currentQuestion = availableQuestions[questionsIndex];
+    questionElement.innerText = currentQuestion.question;
 
-        questionCounter++;
-        progressText.innerText = `Question ${questionCounter} of ${maxQuestions}`;
-        progressBarFull.style.width = `${(questionCounter / maxQuestions) * 100}%`;
-
-        const questionIndex = Math.floor(Math.random() * availableQuestions.length);
-        currentQuestion = availableQuestions[questionIndex];
-        question.innerText = currentQuestion.question;
-
-        choices.forEach((choice, index) => {
-            choice.innerText = currentQuestion.choices[index];
-        });
-
-        availableQuestions.splice(questionIndex, 1);
-
-        acceptingAnswers = true;
-    };
-
-    choices.forEach((choice) => {
-        choice.addEventListener('click', (e) => {
-            if (!acceptingAnswers) return;
-
-            acceptingAnswers = false;
-            const selectedChoice = e.target;
-            const selectedAnswer = selectedChoice.dataset['number'];
-
-            let classToApply = selectedAnswer === currentQuestion.answer ? 'correct' : 'incorrect';
-
-            if (classToApply === 'correct') {
-                incrementScore(SCORE_POINTS);
-            }
-
-            selectedChoice.parentElement.classList.add(classToApply);
-
-            setTimeout(() => {
-                selectedChoice.parentElement.classList.remove(classToApply);
-                startNextQuestion();
-            }, 1000);
-        });
+    choices.forEach((choice, index) => {
+        const choiceNumber = index + 1;
+        choice.innerText = currentQuestion['choice' + choiceNumber];
     });
 
-    const incrementScore = (num) => {
-        score += num;
-        scoreText.innerText = score;
-    };
+    availableQuestions.splice(questionsIndex, 1);
 
-    const shuffleArray = (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    };
-
-    // Start the game with the first quiz
-    startGame();
+    acceptingAnswers = true;
 }
 
+function incrementScore(points) {
+    score += points;
+    scoreText.innerText = score;
+}
 
-else if (quizType === 'questions') {
-    // Quiz Version 2 (Questions Array)
-    const questions = quizInfo.questions;
+choices.forEach((choice) => {
+    choice.addEventListener('click', (e) => {
+        if (!acceptingAnswers) return;
 
-    const SCORE_POINTS = 100;
-    const MAX_QUESTIONS = quizInfo.numberOfQuestions;
+        acceptingAnswers = false;
+        const selectedChoice = e.target;
+        const selectedAnswer = parseInt(selectedChoice.dataset['number']);
 
-    startGame = () => {
-        questionCounter = 0;
-        score = 0;
-        availableQuestions = [...questions];
-        getNewQuestion();
-    };
+        const classToApply = selectedAnswer === currentQuestion.answer ? 'correct' : 'incorrect';
 
-    getNewQuestion = () => {
-        if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
-            localStorage.setItem('mostRecentScore', score);
-            return window.location.assign('/end.html');
+        if (classToApply === 'correct') {
+            incrementScore(SCORE_POINTS);
         }
-        questionCounter++;
-        progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
-        progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
 
-        const currentQuestionIndex = questionCounter - 1;
-        currentQuestion = availableQuestions[currentQuestionIndex];
-        question.innerText = currentQuestion.question;
+        selectedChoice.parentElement.classList.add(classToApply);
 
-        Object.entries(currentQuestion.options).forEach(([option, isCorrect]) => {
-            const choice = document.getElementById(`choice${option}`);
-            choice.innerText = option;
-            choice.dataset.number = option;
-        });
-
-        acceptingAnswers = true;
-    };
-
-    choices.forEach((choice) => {
-        choice.addEventListener('click', (e) => {
-            if (!acceptingAnswers) return;
-
-            acceptingAnswers = false;
-            const selectedChoice = e.target;
-            const selectedAnswer = selectedChoice.dataset['number'];
-
-            const classToApply = currentQuestion.options[selectedAnswer] ? 'correct' : 'incorrect';
-
-            if (classToApply === 'correct') {
-                incrementScore(SCORE_POINTS);
-            }
-
-            selectedChoice.parentElement.classList.add(classToApply);
-
-            setTimeout(() => {
-                selectedChoice.parentElement.classList.remove(classToApply);
-                getNewQuestion();
-            }, 1000);
-        });
+        setTimeout(() => {
+            selectedChoice.parentElement.classList.remove(classToApply);
+            getNewQuestion();
+        }, 1000);
     });
+});
 
-    incrementScore = (num) => {
-        score += num;
-        scoreText.innerText = score;
-    };
-
-    startGame();
-}
+startGame();

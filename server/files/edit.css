@@ -33,7 +33,7 @@ body{
     align-items: center;
     min-height: 100vh;
     min-width: 75%;
-
+    overflow-x: hidden;
 }
 
 form {
@@ -82,10 +82,8 @@ button {
     margin-bottom: 1rem;
     text-decoration: none;
     color: var(--text-color);
-    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     border-radius: 5px;
     transition: transform 0.3s;
-    border: none;
     outline: none;
     cursor: pointer;
 }
@@ -243,19 +241,80 @@ button.save-button {
 }
 
 #addQuestion, #saveQuestion {
+    border: none;
     max-width: 40%;
 }
 
-#addQuestion {
+#addQuestion, #addQuestion1 {
     margin-bottom: 2rem;
+    border: none;
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
 }
 
-#saveQuestion {
+#saveQuestion, #saveQuestion1 {
+    border: none;
     margin-bottom: 2rem;
     background: linear-gradient(32deg, rgba(11, 223, 36) 0%, rgb(41, 232, 111) 100%);
 }
 
-#saveQuestion:hover {
+#saveQuestion:hover, #saveQuestion1:hover {
     box-shadow: 0 0.4rem 0 rgba(41, 232, 111, 0.6);
     transform: scale(1.03);
+}
+
+select#category {
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 2.4rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    height: auto;
+}
+
+.question-container {
+    position: relative;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.question-container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.question-heading {
+    float: left;
+}
+
+.delete-button {
+    float: right;
+    font-size: 2.1rem;
+    padding: 0.5rem;
+    color: red;
+    background: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    max-width: 10rem;
+}
+
+.delete-button:hover {
+    box-shadow: none;
+}
+
+.question-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
