@@ -12,7 +12,7 @@ window.onload = function () {
 
             // Username
             const username = document.getElementById("quiz-username")
-            username.innerHTML = "by " + quiz.creatorID
+            username.innerHTML = "by " + quiz.creatorName
 
             // Date
             const date = document.getElementById("quiz-info-date")
@@ -31,10 +31,10 @@ window.onload = function () {
             desc.innerHTML = quiz.description
 
             // take quiz
-            const btn = document.getElementById("btn-take-quiz")
-            btn.addEventListener("click", function (){
-                location.href = "game.html?quizId=" + quiz.id;
-            })
+            const btn = document.getElementById("btn-take-quiz");
+            btn.addEventListener("click", function () {
+                window.location.href = `game.html`;
+            });
 
             const btnBack = document.getElementById("back-btn")
             btnBack.addEventListener("click", function (){
@@ -47,6 +47,6 @@ window.onload = function () {
         }
 
     }
-    xhr.open("GET", "/quizes/" + id)
+    xhr.open("GET", "/quizes/" + id, )
     xhr.send()
 }

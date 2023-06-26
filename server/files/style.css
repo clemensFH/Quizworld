@@ -19,7 +19,11 @@ h1 {
 }
 h2 {
     font-size: 4.2rem;
-    margin-bottom: 4rem;
+    color: #eee;
+}
+
+#playAgain {
+    margin-top: 5rem;
 }
 
 .container {
@@ -177,5 +181,4 @@ input[type="submit"]:hover {
     width: 100%; /* Add this line to make the error message span the full width */
     text-align: center; /* Add this line to center-align the error message */
 }
-
 

@@ -132,7 +132,7 @@ window.onload = function () {
                     creatorDate.className = "quiz-preview-creator-date";
 
                     const creator = document.createElement("p");
-                    creator.innerHTML = "by " + quiz.creatorID;
+                    creator.innerHTML = "by " + quiz.creatorName;
                     creator.className = "quiz-preview-creator quiz-preview-item";
                     creatorDate.appendChild(creator);
 

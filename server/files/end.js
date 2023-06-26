@@ -1,36 +1,12 @@
-const username = document.querySelector('#username');
-const saveScoreBtn = document.querySelector('#saveScoreBtn');
-const finalScore = document.querySelector('#finalScore');
-const mostRecentScore = localStorage.getItem('mostRecentScore');
-//const backbtn = document.getElementById("Back")
-//backbtn.href = "startquiz.html/"
+window.onload = function () {
+    const score = localStorage.getItem('mostRecentScore');
+    const maxScore = localStorage.getItem('maxScore');
+    const endScore = document.getElementById('end-score');
+    const endNum = document.getElementById('end-num');
 
-const highScore = JSON.parse(localStorage.getItem('highScore')) || [];
+    endScore.innerText = `Score`;
+    endNum.innerText = `${score} of ${maxScore}`; // Update with the appropriate values
 
-const MAX_HIGH_SCORES = 7;
-
-finalScore.innerText = mostRecentScore;
-
-username.addEventListener('keyup', () => {
-    saveScoreBtn.disabled = !username.value;
-});
-
-saveHighScore = e => {
-    e.preventDefault();
-
-    const score = {
-        score: mostRecentScore,
-        name: username.value
-    };
-
-    highScore.push(score);
-
-    highScore.sort((a,b) => {
-        return b.score - a.score;
-    });
-
-    highScore.splice(5);
-
-    localStorage.setItem('highScore', JSON.stringify(highScore));
-    window.location.assign('/');
-}
+    localStorage.removeItem('mostRecentScore');
+    localStorage.removeItem('maxScore');
+};
