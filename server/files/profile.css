@@ -18,6 +18,14 @@
     font-family: 'Nova Square', cursive;
 }
 
+h2 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    margin-top: 3rem;
+
+}
+
 body {
     background-color: var(--background-color);
     display: flex;
@@ -185,4 +193,34 @@ body {
         margin-right: 0;
         right: 0;
     }
+}
+
+
+.quiz-item {
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#editQuiz-button,
+#deleteQuiz-button {
+    position: absolute;
+    top: 10%;
+    font-size: 5rem;
+    transition: transform 0.3s;
+
+}
+
+#editQuiz-button{
+    right: 10rem;
+}
+
+#deleteQuiz-button{
+    right: 5rem;
+}
+
+#editQuiz-button:hover, #deleteQuiz-button:hover{
+    transform: scale(1.2);
 }

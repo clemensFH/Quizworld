@@ -38,50 +38,18 @@
             <span class="info-label">Since:</span>
             <span id="since">XXX</span>
         </div>
-        <div class="info-row">
-            <span id="quizzes-taken1" class="info-label">Quiz taken:</span>
-            <span id="quizzes-taken">X</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Quiz created:</span>
-            <span id="quizzes-created">X</span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Complete 100%:</span>
-            <span id="complete-100">X</span>
-        </div>
+
     </div>
     <div class="logout-delete-container">
         <button class="logout-button" onclick="logout()">Log out</button>
-        <button class="delete-account-button" onclick="deleteAccount()">Delete Account <i id="trash"
-                                                                                          class="fas fa-trash"></i></button>
+        <button class="delete-account-button" onclick="deleteAccount()">Delete Account <i id="trash" class="fas fa-trash"></i></button>
     </div>
     <div class="quiz-section">
-        <div class="quiz-buttons">
-            <button class="quiz-button" id="quiz-taken-button" onclick="toggleQuizTaken()">Quiz Taken</button>
-            <button class="quiz-button" id="my-quiz-button" onclick="toggleMyQuiz()">My Quiz</button>
-        </div>
-        <div id="quiz-content" class="quiz-content"></div>
+        <h2>My Quizzes</h2>
+        <div id="quizes" class="quiz-list"></div>
     </div>
 </div>
 <script src="profile.js"></script>
 </body>
 
-</html>
-
-
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <script type="module" src="profile.js"></script>
-</head>
-<body>
-    <h2 id="username"></h2>
-    <ul id="quizes">
-
-    </ul>
-</body>
 </html>

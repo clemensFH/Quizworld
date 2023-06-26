@@ -1,7 +1,5 @@
 var user;
 
-// TODO Profile needs to save Quiz!
-
 const xhr = new XMLHttpRequest();
 xhr.onload = function () {
     if (xhr.status === 200) {
@@ -25,14 +23,53 @@ function setQuizzes(user) {
         if (xhr2.status === 200) {
             const quizzes = JSON.parse(xhr2.responseText);
             const quizList = document.getElementById("quizes");
+
+            // Clear the quiz list
+            quizList.innerHTML = "";
+
+            // Iterate over each quiz and create the quiz item
             for (let quiz of quizzes) {
-                console.log(quiz);
-                const element = document.createElement("li");
-                const link = document.createElement("a");
-                link.href = `/edit.html?quizID=${quiz.id}`;
-                link.innerHTML = `Quiz: ${quiz.title}`;
-                element.appendChild(link);
-                quizList.appendChild(element);
+                const quizItem = document.createElement("div");
+                quizItem.classList.add("quiz-item");
+
+                const quizName = document.createElement("p");
+                quizName.classList.add("quiz-name");
+                quizName.innerText = quiz.title;
+
+                const quizDate = document.createElement("p");
+                quizDate.classList.add("quiz-date");
+                quizDate.innerText = quiz.date;
+
+                const quizCategories = document.createElement("p");
+                quizCategories.classList.add("quiz-categories");
+                quizCategories.innerText = quiz.category.join(", ");
+
+
+                const editButton = document.createElement("button");
+                editButton.classList.add("edit-icon");
+                editButton.id = "editQuiz-button"
+                editButton.innerHTML = '<i class="fas fa-pen"></i>';
+                editButton.addEventListener("click", function () {
+                    // Redirect to the edit.html page for the specific quiz
+                    window.location.href = `/edit.html?quizID=${quiz.id}`;
+                });
+
+                const deleteButton = document.createElement("button");
+                deleteButton.classList.add("edit-icon");
+                deleteButton.id = "deleteQuiz-button"
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteButton.addEventListener("click", function () {
+                    // Perform delete functionality for the specific quiz
+                    deleteQuiz(quiz.id);
+                });
+
+                quizItem.appendChild(quizName);
+                quizItem.appendChild(quizDate);
+                quizItem.appendChild(quizCategories);
+                quizItem.appendChild(editButton);
+                quizItem.appendChild(deleteButton);
+
+                quizList.appendChild(quizItem);
             }
         }
     };
@@ -102,77 +139,3 @@ function deleteAccount() {
     //TODO Clemens: Perform account deletion functionality
     alert('Account deleted');
 }
-
-function toggleQuizTaken() {
-    const quizContent = document.getElementById('quiz-content');
-    const quizTakenButton = document.getElementById('quiz-taken-button');
-
-    if (quizContent.style.display === 'none') {
-        quizContent.style.display = 'block';
-        quizTakenButton.classList.add('active');
-    } else {
-        quizContent.style.display = 'none';
-        quizTakenButton.classList.remove('active');
-    }
-
-    document.getElementById('my-quiz-button').classList.remove('active');
-}
-
-function toggleMyQuiz() {
-    const quizContent = document.getElementById('quiz-content');
-    const myQuizButton = document.getElementById('my-quiz-button');
-
-    if (quizContent.style.display === 'none') {
-        quizContent.style.display = 'block';
-        myQuizButton.classList.add('active');
-    } else {
-        quizContent.style.display = 'none';
-        myQuizButton.classList.remove('active');
-    }
-
-    document.getElementById('quiz-taken-button').classList.remove('active');
-}
-
-
-
-
-
-
-
-
-/*var user
-
-const xhr = new XMLHttpRequest();
-xhr.onload = function () {
-    if(xhr.status === 200) {
-        user = JSON.parse(xhr.responseText)
-        console.log(user)
-        const heading = document.getElementById("username")
-        heading.innerHTML = user.name
-        setQuizes(user)
-
-    }
-};
-xhr.open("GET", "/profile")
-xhr.send();
-
-function setQuizes(user) {
-    const xhr2 = new XMLHttpRequest();
-    xhr2.onload = function () {
-        if (xhr2.status === 200) {
-            const quizes = JSON.parse(xhr2.responseText)
-            const quizList = document.getElementById("quizes")
-            for (let quiz of quizes) {
-                console.log(quiz)
-                const element = document.createElement("li")
-                const link = document.createElement("a")
-                link.href = `/edit.html?quizID=${quiz.id}`
-                link.innerHTML = `Quiz: ${quiz.title}`
-                element.appendChild(link)
-                quizList.appendChild(element)
-            }
-        }
-    };
-    xhr2.open("GET", `/quizes?userID=${user.id}`)
-    xhr2.send();
-}*/
