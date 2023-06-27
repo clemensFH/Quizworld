@@ -24,6 +24,7 @@ class User {
         this.id = Quiz.idpool
         Quiz.idpool++
     }
+
     static idpool = 1
 }
 
@@ -285,7 +286,7 @@ Quiz26 = new Quiz('Cartoon & Animation Quiz',
     'Embark on a delightful adventure into the world of Cartoons & Animation with our Cartoon & Animation Quiz! Journey through a nostalgic realm filled with beloved characters, colorful animation, and memorable moments. Test your knowledge of classic cartoons and modern animated series as you dive into questions about iconic characters, animated films, and animated TV shows. From timeless classics to contemporary favorites, this quiz will challenge your expertise in the world of animated entertainment. Whether you\'re a fan of hand-drawn animation, computer-generated imagery, or stop-motion animation, this quiz is designed to entertain and engage fans of all ages. So, gather your favorite animated characters and get ready to put your cartoon knowledge to the test in our thrilling Cartoon & Animation Quiz!',
     null, user1.id)
 
-module.exports.users = [user1, user2, user3]
+module.exports.users = [user1, user2]
 module.exports.quizes = [Quiz1, Quiz2, Quiz3, Quiz4, Quiz5, Quiz6, Quiz7, Quiz8, Quiz9, Quiz10, Quiz11, Quiz12, Quiz13, Quiz14, Quiz15, Quiz16, Quiz17, Quiz18, Quiz19, Quiz20, Quiz21, Quiz22, Quiz23, Quiz24, Quiz25, Quiz26]
 module.exports.questions = [q1, q2, q3]
 
@@ -318,19 +319,11 @@ module.exports.validateUser = function (username, password){
     return undefined
 };
 
-const users = [user1, user2, user3];
-function getUserNameById(users, userId) {
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].id === userId) {
-            return users[i].name;
-        }
-    }
-    return null; // Return null if no user with the given ID is found
-}
-
 module.exports.addQuiz = function (fakeQuiz){
-    fakeQuizCreatorName = getUserNameById(users, fakeQuiz.creatorID)
-    const x = new Quiz(fakeQuiz.title, null, fakeQuiz.questions.length, fakeQuiz.category.split(","), fakeQuizCreatorName, fakeQuiz.date, fakeQuiz.description, fakeQuiz.questions, fakeQuiz.creatorID)
+    let categories = fakeQuiz.category.split(",")
+    let username = module.exports.users.find(u => u.id === fakeQuiz.creatorID).name
+    const x = new Quiz(fakeQuiz.title, null, fakeQuiz.questions.length, categories, username, fakeQuiz.date, fakeQuiz.description,fakeQuiz.questions, fakeQuiz.creatorID)
+    /// title, apiURL, numberOfQuestions, category, creatorName, date, description, questions, creatorID
     x.id = fakeQuiz.id
     module.exports.quizes.push(x)
 }

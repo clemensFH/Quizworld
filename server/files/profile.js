@@ -148,7 +148,8 @@ function logout() {
     const xhrlogout = new XMLHttpRequest();
     xhrlogout.onload = function () {
         if (xhrlogout.status === 200) {
-            window.location.reload();
+            window.location.href = "/";
+            window.location.location.reload();
         }
     };
     xhrlogout.open("GET", "/logout");
