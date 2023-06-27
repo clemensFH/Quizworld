@@ -9,7 +9,6 @@
     <title>Quiz Preview</title>
 </head>
 <script src="startquiz.js" type="module"></script>
-<script src="game.js" type="module"></script>
 <body>
 <div class="container">
     <button id="back-btn" onclick="goBack()"><i class="fas fa-home"></i></button>
@@ -39,10 +38,6 @@
     function goBack() {
         window.history.back();
     }
-
-    document.getElementById("btn-take-quiz").addEventListener("click", function () {
-        location.href = "game.html";
-    });
 </script>
 </body>
 

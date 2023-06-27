@@ -66,8 +66,9 @@ h3 {
 }
 
 #quiz-info-desc{
-    text-overflow: ellipsis;
-}
+    text-align: justify;
+    text-justify: inter-word;
+    }
 
 h4 {
     font-size: 2.4rem;

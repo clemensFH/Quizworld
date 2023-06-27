@@ -5,8 +5,17 @@ window.onload = function () {
     const endNum = document.getElementById('end-num');
 
     endScore.innerText = `Score`;
-    endNum.innerText = `${score} of ${maxScore}`; // Update with the appropriate values
+    endNum.innerText = `${score} of ${maxScore}`; // Display the maxScore
 
     localStorage.removeItem('mostRecentScore');
     localStorage.removeItem('maxScore');
 };
+
+function backToGame() {
+    window.history.back();
+}
+
+function backToStartquiz() {
+    window.history.back();
+    window.history.back();
+}

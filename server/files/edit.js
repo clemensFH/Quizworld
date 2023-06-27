@@ -69,13 +69,13 @@ function putQuiz() {
 
 
 const quizID = new URLSearchParams(window.location.search).get("quizID");
+
 const xhr = new XMLHttpRequest()
 xhr.onload = function () {
     if (xhr.status === 200) {
         const body = document.querySelector("body")
         const quiz = JSON.parse(xhr.responseText)
 
-        // TODO Optional Klea: Frage hinzufügen/löschen
 
         document.getElementById("id").value = quiz.id
         document.getElementById("creatorID").value = quiz.creatorID
@@ -83,7 +83,6 @@ xhr.onload = function () {
         document.getElementById("title").value = quiz.title
         document.getElementById("category").value = quiz.category
         document.getElementById("description").value = quiz.description
-
 
         var i = 1
         for (var question of quiz.questions) {

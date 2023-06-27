@@ -33,7 +33,7 @@ window.onload = function () {
             // take quiz
             const btn = document.getElementById("btn-take-quiz");
             btn.addEventListener("click", function () {
-                window.location.href = `game.html`;
+                location.href = "game.html?quizId=" + quiz.id;
             });
 
             const btnBack = document.getElementById("back-btn")
