@@ -78,7 +78,7 @@ function setQuizzes(user) {
 }
 
 function goBack() {
-    window.history.back();
+    window.location.href = "home.html"
 }
 
 function toggleUsernameEdit() {
@@ -94,6 +94,16 @@ function toggleUsernameEdit() {
         // Save the updated username
         const newUsername = usernameInput.value;
         usernameSection.textContent = newUsername;
+        user.name = newUsername
+        const xhrupdatename = new XMLHttpRequest();
+        xhrupdatename.onload = function () {
+            if (xhrupdatename.status === 200) {
+                window.location.reload();
+            }
+        };
+        xhrupdatename.open("PUT", "/updateuser");
+        xhrupdatename.setRequestHeader("Content-Type", "application/json");
+        xhrupdatename.send(JSON.stringify(user));
     } else {
         usernameSection.style.display = 'none';
         usernameEditSection.style.display = 'inline';
@@ -115,6 +125,16 @@ function togglePasswordEdit() {
         // Save the updated password
         const newPassword = passwordInput.value;
         passwordSection.textContent = newPassword;
+        user.password = newPassword
+        const xhrupdatepw = new XMLHttpRequest();
+        xhrupdatepw.onload = function () {
+            if (xhrupdatepw.status === 200) {
+                window.location.reload();
+            }
+        };
+        xhrupdatepw.open("PUT", "/updateuser");
+        xhrupdatepw.setRequestHeader("Content-Type", "application/json");
+        xhrupdatepw.send(JSON.stringify(user));
     } else {
         passwordSection.style.display = 'none';
         passwordEditSection.style.display = 'inline';
@@ -135,7 +155,24 @@ function logout() {
     xhrlogout.send();
 }
 
+function deleteQuiz(quizID){
+    const xhrdelete = new XMLHttpRequest();
+    xhrdelete.onload = function () {
+        if (xhrdelete.status === 200) {
+            window.location.reload();
+        }
+    };
+    xhrdelete.open("DELETE", "/quiz/" + quizID);
+    xhrdelete.send();
+}
+
 function deleteAccount() {
-    //TODO Clemens: Perform account deletion functionality
-    alert('Account deleted');
+    const xhrdelete = new XMLHttpRequest();
+    xhrdelete.onload = function () {
+        if (xhrdelete.status === 200) {
+            window.location.href = "/";
+        }
+    };
+    xhrdelete.open("DELETE", "/user/" + user.id);
+    xhrdelete.send();
 }

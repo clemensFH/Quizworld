@@ -183,12 +183,34 @@ app.post('/user',(req,res) => {
 
 
 /*
+    PUT User updaten
+ */
+app.put('/updateuser',(req,res) => {
+    QuizWorldModel.updateUser(req.body)
+    res.sendStatus(200)
+})
+
+
+/*
     DELETE Quiz löschen
  */
 app.delete("/quiz/:quizID", function (req, res){
     const id = req.params.quizID
+    console.log("Deleting Quiz " + id)
+    QuizWorldModel.removeQuiz(id)
+    res.sendStatus(200)
+});
+
+
+/*
+    DELETE User löschen
+ */
+app.delete("/user/:userID", function (req, res){
+    const id = req.params.userID
+    console.log("Deleting User " + id)
     QuizWorldModel.removeUser(id)
-    res.send(200)
+    res.sendStatus(200)
+    req.session.destroy();
 });
 
 app.listen(3000)

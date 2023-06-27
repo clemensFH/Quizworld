@@ -304,7 +304,7 @@ module.exports.removeUser = function (userid) {
     }
     console.log("Removing user with id: " + userid)
 
-    module.exports.quizes = module.exports.quizes.filter(quiz => quiz.creator.id != userid)
+    module.exports.quizes = module.exports.quizes.filter(quiz => quiz.creatorID != userid)
 
     module.exports.users.splice(idx, 1)
 };
@@ -326,10 +326,21 @@ module.exports.addQuiz = function (fakeQuiz){
 }
 
 module.exports.removeQuiz = function (quizID){
-    module.exports.quizes = module.exports.quizes.filter(q => q.id !== quizID)
+    module.exports.quizes = module.exports.quizes.filter(q => q.id != quizID)
 }
 
 module.exports.updateQuiz = function (fakeQuiz){
     module.exports.removeQuiz(fakeQuiz.id)
     module.exports.addQuiz(fakeQuiz)
+}
+
+module.exports.updateUser = function (newuser){
+    for(let i=0; i<module.exports.users.length; i++){
+        let user = module.exports.users[i]
+        if(user.id === newuser.id){
+            user.name = newuser.name
+            user.password = newuser.password
+            return;
+        }
+    }
 }
