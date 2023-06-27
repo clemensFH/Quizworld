@@ -313,8 +313,12 @@ select#category {
     justify-content: space-between;
 }
 
-.heading-container {
+.heading-container, questionsHeader{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#questionsHeader{
+    margin-bottom: 2.8rem;
 }

@@ -22,22 +22,11 @@ function addQuestion(){
     const form = document.createElement("form")
     const innerDiv = document.createElement("div")
 
-    const questionWrapper = document.createElement("div");
-    questionWrapper.classList.add("question-wrapper");
-
     const heading = document.createElement("h5");
+    heading.id = "questionsHeader";
     heading.innerHTML = "Question " + qnr;
-    questionWrapper.appendChild(heading);
+    innerDiv.appendChild(heading);
 
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.classList.add("delete-button");
-    deleteButton.addEventListener("click", function() {
-        deleteQuestion(qnr);
-    });
-    questionWrapper.appendChild(deleteButton);
-
-    innerDiv.appendChild(questionWrapper);
 
     const questionText = document.createElement("textarea")
     questionText.id = `Q${qnr}_Text`

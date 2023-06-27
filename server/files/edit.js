@@ -89,23 +89,9 @@ xhr.onload = function () {
             const form = document.createElement("form")
             const container = document.createElement("div");
 
-            const questionWrapper = document.createElement("div");
-            questionWrapper.classList.add("question-wrapper");
-
             const heading = document.createElement("h5");
             heading.innerHTML = "Question " + i;
-            questionWrapper.appendChild(heading);
-
-            const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Delete";
-            deleteButton.classList.add("delete-button");
-            deleteButton.addEventListener("click", function() {
-                deleteQuestion(i);
-            });
-
-            questionWrapper.appendChild(deleteButton);
-            container.appendChild(questionWrapper)
-
+            container.appendChild(heading);
 
             const questionText = document.createElement("textarea")
             questionText.placeholder = "Type in Question..."
